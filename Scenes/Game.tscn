@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=3 uid="uid://dby2mesct2q8t"]
+
+[ext_resource type="Script" uid="uid://boaeo4l702s7u" path="res://Scripts/Controllers/GameController.gd" id="1_gl6un"]
+[ext_resource type="PackedScene" uid="uid://c5j0pg0krwk4t" path="res://Prefabs/UI/pause_menu.tscn" id="2_j5yw3"]
+[ext_resource type="PackedScene" uid="uid://dhpowydkha7v1" path="res://addons/weekendDialogue/Examples/conversation_controller.tscn" id="3_e0vue"]
+[ext_resource type="Texture2D" uid="uid://de2ein1yl3mby" path="res://Sprites/Kenny Icons/joystick.png" id="3_j5yw3"]
+
+[sub_resource type="GDScript" id="GDScript_kldst"]
+script/source = "extends Sprite2D
+
+@export var speed : float = 1
+
+func _process(delta: float) -> void:
+	rotate(delta * speed)
+"
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_gl6un")
+_use_debug = true
+_debug_mute_music = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Conversation Controller" parent="CanvasLayer" instance=ExtResource("3_e0vue")]
+visible = false
+
+[node name="Pause Menu" parent="CanvasLayer" instance=ExtResource("2_j5yw3")]
+
+[node name="Sprite2D10" type="Sprite2D" parent="."]
+modulate = Color(1, 0.700661, 0.765894, 1)
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.55
+
+[node name="Sprite2D9" type="Sprite2D" parent="."]
+modulate = Color(0.996386, 0.537994, 0.457638, 1)
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.6
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+modulate = Color(0.908505, 0.408677, 0, 1)
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.65
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+modulate = Color(0.622926, 0.393602, 0, 1)
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.7
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+modulate = Color(0.427924, 0.415698, 0.0431678, 1)
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.75
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+modulate = Color(0.459623, 0.5768, 0, 1)
+position = Vector2(557, 327)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.8
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+modulate = Color(0.229283, 0.576584, 1.92523e-07, 1)
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.85
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(2.88785e-06, 0.767259, 0.504904, 1)
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.9
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0, 0.89785, 0.908871, 1)
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")
+speed = 0.95
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(557, 326)
+scale = Vector2(3.8, 3.8)
+texture = ExtResource("3_j5yw3")
+script = SubResource("GDScript_kldst")

@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=16 format=3 uid="uid://crtmtk8jti3gq"]
+
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogueNodeData.gd" id="1_cr8kl"]
+[ext_resource type="Resource" uid="uid://kp6jcp55lm1g" path="res://addons/weekendDialogue/Examples/Example Characters.tres" id="1_dc20o"]
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogueStartNodeData.gd" id="2_oucrf"]
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogueData.gd" id="2_vlfbc"]
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogueOption.gd" id="3_fm80j"]
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogueConversationNodeData.gd" id="4_8mehq"]
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogueSetVariableNodeData.gd" id="5_t0jf0"]
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogueCompareVariableNodeData.gd" id="7_4yv5g"]
+
+[sub_resource type="Resource" id="Resource_tlxkr"]
+script = ExtResource("3_fm80j")
+text = "default"
+linking_node_id = 3
+
+[sub_resource type="Resource" id="Resource_pet0b"]
+script = ExtResource("4_8mehq")
+text = "
+"
+options = Array[ExtResource("3_fm80j")]([SubResource("Resource_tlxkr")])
+character_id = 0
+id = 2
+position = Vector2(20, -220)
+size = Vector2(394, 288)
+
+[sub_resource type="Resource" id="Resource_3huct"]
+script = ExtResource("5_t0jf0")
+connected_node_id = -1
+save_type = 0
+saved_key = "test"
+saved_value = ""
+id = 3
+position = Vector2(460, -180)
+size = Vector2(282, 252)
+
+[sub_resource type="Resource" id="Resource_88yx7"]
+script = ExtResource("7_4yv5g")
+key = ""
+default_connected_node = 2
+connections = {
+"": 5
+}
+id = 4
+position = Vector2(-540, -100)
+size = Vector2(361, 244)
+
+[sub_resource type="Resource" id="Resource_5w7m3"]
+script = ExtResource("2_oucrf")
+first_node_id = 4
+start_key = "default"
+id = 0
+position = Vector2(-1260, -100)
+size = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_bgd7q"]
+script = ExtResource("2_oucrf")
+first_node_id = 2
+start_key = "second"
+id = 0
+position = Vector2(-1260, -460)
+size = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_f5b0n"]
+script = ExtResource("4_8mehq")
+text = ""
+options = Array[ExtResource("3_fm80j")]([])
+character_id = 0
+id = 5
+position = Vector2(20, 100)
+size = Vector2(394, 288)
+
+[resource]
+script = ExtResource("2_vlfbc")
+data = Array[ExtResource("1_cr8kl")]([SubResource("Resource_pet0b"), SubResource("Resource_3huct"), SubResource("Resource_88yx7"), SubResource("Resource_5w7m3"), SubResource("Resource_bgd7q"), SubResource("Resource_f5b0n")])
+connnections = Array[String](["Dialogue Node_2,0,Set Variable Node_3,0", "Compare Variable Node_4,0,Dialogue Node_2,0", "Start Node_0,0,Compare Variable Node_4,0", "Compare Variable Node_4,1,Dialogue Node_5,0", "Start Node_1,0,Dialogue Node_2,0"])
+characters = ExtResource("1_dc20o")

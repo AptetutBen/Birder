@@ -1,0 +1,150 @@
+[gd_scene load_steps=4 format=3 uid="uid://cufx4633uoge0"]
+
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogueConversationNode.gd" id="1_tkl7i"]
+[ext_resource type="Theme" uid="uid://di2blioe5dqny" path="res://addons/weekendDialogue/Themes/NodeTheme.tres" id="1_x7dxk"]
+[ext_resource type="PackedScene" uid="uid://da0digpeup2bd" path="res://addons/weekendDialogue/Prefabs/dialogue_option.tscn" id="2_ylejc"]
+
+[node name="Dialogue Node" type="GraphNode" node_paths=PackedStringArray("character_picker")]
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 376.0
+offset_bottom = 231.0
+mouse_filter = 1
+theme = ExtResource("1_x7dxk")
+resizable = true
+title = "Node"
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(0.86, 0.573333, 0, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = true
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+script = ExtResource("1_tkl7i")
+character_picker = NodePath("Header/Character Picker")
+option_prefab = ExtResource("2_ylejc")
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Character Picker" type="OptionButton" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 1
+popup/item_0/text = "None"
+
+[node name="Editor Button" type="Button" parent="Header"]
+custom_minimum_size = Vector2(31.14, 0)
+layout_mode = 2
+text = "E"
+
+[node name="Close Button" type="Button" parent="Header"]
+custom_minimum_size = Vector2(31.14, 0)
+layout_mode = 2
+text = "X"
+
+[node name="Editor" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 58.04)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Text Edit Scroll" type="ScrollContainer" parent="Editor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+horizontal_scroll_mode = 0
+
+[node name="TextEdit" type="TextEdit" parent="Editor/Text Edit Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_constants/line_spacing = 1
+wrap_mode = 1
+autowrap_mode = 2
+scroll_fit_content_height = true
+
+[node name="Preview Container" type="MarginContainer" parent="Editor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Preview Text" type="RichTextLabel" parent="Editor/Preview Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
+shortcut_keys_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Default" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 33.51)
+layout_mode = 2
+text = "Default
+"
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Add Option Button" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Option +"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 41.07)
+layout_mode = 2
+
+[connection signal="pressed" from="Header/Editor Button" to="." method="_on_editor_button_pressed"]
+[connection signal="pressed" from="Header/Close Button" to="." method="_on_delete_request"]
+[connection signal="text_changed" from="Editor/Text Edit Scroll/TextEdit" to="." method="editor_text_changed"]
+[connection signal="gui_input" from="Editor/Preview Container/Preview Text" to="." method="_on_preview_text_gui_input"]

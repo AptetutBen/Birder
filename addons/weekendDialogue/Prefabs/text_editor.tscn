@@ -1,0 +1,105 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr4v61ty3q5wg"]
+
+[ext_resource type="Script" uid="uid://cqb8dqy20rc33" path="res://addons/weekendDialogue/Scripts/TextEditorDialogueNode.gd" id="1_bx6pa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkana"]
+bg_color = Color(0.0920593, 0.0233568, 0.0649891, 1)
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdwvp"]
+bg_color = Color(0.386777, 0.113947, 0.146998, 1)
+
+[node name="Text Editor" type="GraphNode"]
+offset_left = 429.0
+offset_top = 144.0
+offset_right = 815.0
+offset_bottom = 432.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_xkana")
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_pdwvp")
+position_offset = Vector2(429, 144)
+resizable = true
+draggable = false
+selectable = false
+title = "Text Editor"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_bx6pa")
+
+[node name="Editor Group" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120.68)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextEdit" type="TextEdit" parent="Editor Group"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0.211436, 0.140996, 0.119504, 1)
+text = "This is sample text"
+deselect_on_focus_loss_enabled = false
+wrap_mode = 1
+
+[node name="Edit Buttons 1" type="HBoxContainer" parent="Editor Group"]
+custom_minimum_size = Vector2(0, 22.69)
+layout_mode = 2
+
+[node name="Bold Button" type="Button" parent="Editor Group/Edit Buttons 1"]
+layout_mode = 2
+text = "B"
+
+[node name="Italic Button" type="Button" parent="Editor Group/Edit Buttons 1"]
+layout_mode = 2
+text = "I"
+
+[node name="Underline Button" type="Button" parent="Editor Group/Edit Buttons 1"]
+layout_mode = 2
+text = "u"
+
+[node name="Wave Button" type="Button" parent="Editor Group/Edit Buttons 1"]
+layout_mode = 2
+text = "wave"
+
+[node name="Shake Button" type="Button" parent="Editor Group/Edit Buttons 1"]
+layout_mode = 2
+text = "shake"
+
+[node name="Tornado Button" type="Button" parent="Editor Group/Edit Buttons 1"]
+layout_mode = 2
+text = "tornado"
+
+[node name="Edit Buttons 2" type="HBoxContainer" parent="Editor Group"]
+custom_minimum_size = Vector2(0, 22.69)
+layout_mode = 2
+
+[node name="Fade Button" type="Button" parent="Editor Group/Edit Buttons 2"]
+layout_mode = 2
+text = "fade"
+
+[node name="Raindow Button" type="Button" parent="Editor Group/Edit Buttons 2"]
+layout_mode = 2
+text = "rainbow"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Editor Group/Edit Buttons 2"]
+layout_mode = 2
+text = "co"
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[connection signal="pressed" from="Editor Group/Edit Buttons 1/Bold Button" to="." method="_on_bold_button_press"]
+[connection signal="pressed" from="Editor Group/Edit Buttons 1/Italic Button" to="." method="_on_italic_button_press"]
+[connection signal="pressed" from="Editor Group/Edit Buttons 1/Underline Button" to="." method="_on_underline_button_press"]
+[connection signal="pressed" from="Editor Group/Edit Buttons 1/Wave Button" to="." method="_on_wave_button_press"]
+[connection signal="pressed" from="Editor Group/Edit Buttons 1/Shake Button" to="." method="_on_shake_button_press"]
+[connection signal="pressed" from="Editor Group/Edit Buttons 1/Tornado Button" to="." method="_on_tornado_button_press"]
+[connection signal="pressed" from="Editor Group/Edit Buttons 2/Fade Button" to="." method="_on_fade_button_press"]
+[connection signal="pressed" from="Editor Group/Edit Buttons 2/Raindow Button" to="." method="_on_rainbow_button_press"]

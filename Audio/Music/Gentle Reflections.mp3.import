@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dh8yb3nt3kqfq"
+path="res://.godot/imported/Gentle Reflections.mp3-ee47392882e267daa90ec4cc8f880d7e.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Gentle Reflections.mp3"
+dest_files=["res://.godot/imported/Gentle Reflections.mp3-ee47392882e267daa90ec4cc8f880d7e.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogueCharacters" load_steps=3 format=3 uid="uid://kp6jcp55lm1g"]
+
+[ext_resource type="Script" uid="uid://cc84ikea41f6" path="res://addons/weekendDialogue/Scripts/DialogueCharacter.gd" id="1_vddh0"]
+[ext_resource type="Script" uid="uid://bagpaub04ow1s" path="res://addons/weekendDialogue/Scripts/DialogueCharacters.gd" id="2_1kitr"]
+
+[resource]
+script = ExtResource("2_1kitr")
+characters = Array[ExtResource("1_vddh0")]([])

@@ -1,0 +1,174 @@
+[gd_scene load_steps=11 format=3 uid="uid://dhpowydkha7v1"]
+
+[ext_resource type="Script" path="res://Scripts/Controllers/ConversationController.gd" id="1_cy2ph"]
+[ext_resource type="Texture2D" uid="uid://r50oq5df1ugk" path="res://Sprites/UI/UI Panels.png" id="2_urhja"]
+[ext_resource type="Theme" uid="uid://c7vaw5wq61pbh" path="res://Themes/UI.tres" id="3_nmcnx"]
+[ext_resource type="Script" path="res://Scripts/Tools/AutosizeRichLabel.gd" id="4_djxj8"]
+[ext_resource type="FontFile" uid="uid://y2fjskeskhyt" path="res://Fonts/Chewy-Regular.ttf" id="5_q4kpe"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rfssg"]
+texture = ExtResource("2_urhja")
+region_rect = Rect2(910.699, 68.1023, 966.759, 198.048)
+modulate_color = Color(0.442152, 0.227593, 0.199155, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8tnk5"]
+texture = ExtResource("2_urhja")
+region_rect = Rect2(910.699, 68.1023, 966.759, 198.048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tnk5"]
+atlas = ExtResource("2_urhja")
+region = Rect2(1800.07, 267.79, 49.9259, 77.3045)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c008f"]
+texture = ExtResource("2_urhja")
+region_rect = Rect2(922.5, 271.5, 238.997, 98.5)
+modulate_color = Color(0.972309, 0.875565, 0.799216, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2h8s2"]
+font = ExtResource("5_q4kpe")
+font_size = 26
+font_color = Color(0.237323, 0.0197008, 0.106741, 1)
+
+[node name="Conversation Controller" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -105.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(100, 0)
+script = ExtResource("1_cy2ph")
+
+[node name="Pivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Main Text Panel" type="Control" parent="Pivot"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -162.0
+offset_top = -38.0
+offset_right = 407.0
+offset_bottom = 61.0
+
+[node name="Panel" type="Panel" parent="Pivot/Main Text Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_rfssg")
+
+[node name="Shadow" type="Panel" parent="Pivot/Main Text Panel/Panel"]
+self_modulate = Color(0, 0, 0, 0.321569)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.544
+anchor_top = 0.112
+anchor_right = 0.544
+anchor_bottom = 0.112
+offset_left = -302.536
+offset_top = -10.088
+offset_right = 264.464
+offset_bottom = 92.912
+theme_override_styles/panel = SubResource("StyleBoxTexture_8tnk5")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pivot/Main Text Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 13
+
+[node name="Main Text" type="RichTextLabel" parent="Pivot/Main Text Panel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_nmcnx")
+theme_override_font_sizes/normal_font_size = 27
+bbcode_enabled = true
+text = "This is where the conversation is placed"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+visible_characters_behavior = 1
+script = ExtResource("4_djxj8")
+max_font_size = 27
+metadata/_custom_type_script = ExtResource("4_djxj8")
+
+[node name="Input Prompt Image" type="TextureRect" parent="Pivot/Main Text Panel"]
+unique_name_in_owner = true
+self_modulate = Color(0.960784, 0.956863, 0.945098, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -40.0
+offset_right = -23.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_8tnk5")
+expand_mode = 1
+
+[node name="Speaker Name" type="Panel" parent="Pivot/Main Text Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -23.0
+offset_top = -38.0
+offset_right = 136.0
+offset_bottom = 16.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_c008f")
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Pivot/Main Text Panel/Speaker Name"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Speaker Name Text" type="Label" parent="Pivot/Main Text Panel/Speaker Name/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_nmcnx")
+text = "Name"
+label_settings = SubResource("LabelSettings_2h8s2")
+horizontal_alignment = 1
+
+[node name="Shadow" type="Panel" parent="Pivot/Main Text Panel/Speaker Name"]
+self_modulate = Color(0, 0, 0, 0.321569)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.5
+offset_top = -23.0
+offset_right = 83.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c008f")
+metadata/_edit_group_ = true

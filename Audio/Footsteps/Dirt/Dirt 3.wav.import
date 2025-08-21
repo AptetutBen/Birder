@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://2qu2ov3epbbg"
+path="res://.godot/imported/Dirt 3.wav-7fdbb0f78bb4d43e82ef1c4da817890f.sample"
+
+[deps]
+
+source_file="res://Audio/Footsteps/Dirt/Dirt 3.wav"
+dest_files=["res://.godot/imported/Dirt 3.wav-7fdbb0f78bb4d43e82ef1c4da817890f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

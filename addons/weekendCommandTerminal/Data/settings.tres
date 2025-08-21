@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TerminalSettings" load_steps=2 format=3 uid="uid://hx706i7pq8ux"]
+
+[ext_resource type="Script" uid="uid://pt0g2dbkh8e2" path="res://addons/weekendCommandTerminal/Scripts/TerminalSettings.gd" id="1_ibm3t"]
+
+[resource]
+script = ExtResource("1_ibm3t")
+font_size = 10

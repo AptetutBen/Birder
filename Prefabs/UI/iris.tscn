@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c12x0ludymj0b"]
+
+[ext_resource type="Shader" uid="uid://cqjbtjpt7io2i" path="res://Shaders/iris.gdshader" id="1_lwkpp"]
+[ext_resource type="Script" uid="uid://hexeyuxpxkjp" path="res://Scripts/UI/IrisUI.gd" id="2_p1fh1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lihs"]
+shader = ExtResource("1_lwkpp")
+shader_parameter/pos = Vector2(100, 100)
+shader_parameter/viewport_size = Vector2(200, 200)
+shader_parameter/r = 97.9
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kldst"]
+
+[node name="Iris" type="TextureRect"]
+material = SubResource("ShaderMaterial_7lihs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_kldst")
+script = ExtResource("2_p1fh1")

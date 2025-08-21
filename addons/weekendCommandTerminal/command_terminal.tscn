@@ -1,0 +1,134 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8wg4cuwctt0r"]
+
+[ext_resource type="Script" uid="uid://cp1nwrstgnbkm" path="res://addons/weekendCommandTerminal/Scripts/TerminalPanel.gd" id="1_65041"]
+[ext_resource type="Shader" uid="uid://nyj3fp27uhe5" path="res://addons/weekendCommandTerminal/Shaders/blur.gdshader" id="2_8k2bl"]
+[ext_resource type="FontFile" uid="uid://jbwcecxwdgqu" path="res://Fonts/RobotoMono.ttf" id="2_w15k2"]
+[ext_resource type="Theme" uid="uid://ddngojvg5rlkb" path="res://Themes/CommandWindow.tres" id="3_bkk3c"]
+[ext_resource type="Texture2D" uid="uid://d3t48kyvnql5p" path="res://addons/weekendCommandTerminal/Sprites/Drag Handle.png" id="4_wnaq4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yjyhu"]
+shader = ExtResource("2_8k2bl")
+shader_parameter/sigma = 8.138
+
+[node name="Command Terminal" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_65041")
+
+[node name="Main Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_yjyhu")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 166.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="Main Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882, 0.105882, 0.105882, 0.541176)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 91.83)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Main Panel/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Panel/VBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Output Label" type="Label" parent="Main Panel/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_w15k2")
+theme_override_font_sizes/font_size = 15
+vertical_alignment = 2
+
+[node name="Text Entry" type="MarginContainer" parent="Main Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main Panel/VBoxContainer/Text Entry"]
+layout_mode = 2
+
+[node name="Beginning_label" type="Label" parent="Main Panel/VBoxContainer/Text Entry/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_w15k2")
+theme_override_font_sizes/font_size = 12
+text = ":"
+horizontal_alignment = 2
+
+[node name="CommandEdit" type="LineEdit" parent="Main Panel/VBoxContainer/Text Entry/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("3_bkk3c")
+theme_override_fonts/font = ExtResource("2_w15k2")
+theme_override_font_sizes/font_size = 30
+context_menu_enabled = false
+shortcut_keys_enabled = false
+
+[node name="SuggestedText" type="LineEdit" parent="Main Panel/VBoxContainer/Text Entry/HBoxContainer/CommandEdit"]
+unique_name_in_owner = true
+modulate = Color(0.999075, 0.270899, 0.550666, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_bkk3c")
+theme_override_fonts/font = ExtResource("2_w15k2")
+theme_override_font_sizes/font_size = 30
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Panel/VBoxContainer/Text Entry/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 3
+
+[node name="TextureRect" type="TextureRect" parent="Main Panel/VBoxContainer/Text Entry/HBoxContainer/MarginContainer"]
+self_modulate = Color(0.409889, 0.22387, 0.270949, 1)
+custom_minimum_size = Vector2(13, 12.59)
+layout_direction = 1
+layout_mode = 2
+texture = ExtResource("4_wnaq4")
+expand_mode = 1
+stretch_mode = 4
+
+[connection signal="gui_input" from="Main Panel/VBoxContainer/Text Entry/HBoxContainer/CommandEdit" to="." method="_edit_input"]
+[connection signal="gui_input" from="Main Panel/VBoxContainer/Text Entry/HBoxContainer/MarginContainer/TextureRect" to="." method="_on_texture_rect_gui_input"]

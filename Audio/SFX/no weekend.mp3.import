@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://he8whlh1i27u"
+path="res://.godot/imported/no weekend.mp3-9b72ae49fdaab8203209b9a652720098.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/no weekend.mp3"
+dest_files=["res://.godot/imported/no weekend.mp3-9b72ae49fdaab8203209b9a652720098.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

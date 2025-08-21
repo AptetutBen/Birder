@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://ddngojvg5rlkb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtfyi"]
+bg_color = Color(0.118581, 0.118581, 0.118581, 1)
+draw_center = false
+border_width_top = 2
+border_color = Color(0.645701, 0.385402, 0.449426, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5nr7"]
+bg_color = Color(0.118581, 0.118581, 0.118581, 1)
+draw_center = false
+border_width_top = 2
+border_color = Color(0.409889, 0.22387, 0.270949, 1)
+border_blend = true
+
+[resource]
+LineEdit/styles/focus = SubResource("StyleBoxFlat_mtfyi")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_u5nr7")

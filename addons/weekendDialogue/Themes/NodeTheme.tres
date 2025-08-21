@@ -1,0 +1,65 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://di2blioe5dqny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hi3a7"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(0.49, 0.49, 0.49, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.215656, 0.212976, 0.235774, 1)
+corner_radius_bottom_left = 20
+corner_detail = 16
+shadow_color = Color(0, 0, 0, 0.17)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cshne"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(0.49, 0.49, 0.49, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.215656, 0.212976, 0.235774, 1)
+corner_radius_bottom_left = 20
+corner_detail = 16
+shadow_color = Color(0, 0, 0, 0.17)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quo4g"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.207843, 0.203922, 0.215686, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0.0408336, 0.136622, 0.0257073, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhxbj"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.363624, 0.357764, 0.375363, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0.0408336, 0.136622, 0.0257073, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[resource]
+GraphNode/styles/panel = SubResource("StyleBoxFlat_hi3a7")
+GraphNode/styles/panel_selected = SubResource("StyleBoxFlat_cshne")
+GraphNode/styles/titlebar = SubResource("StyleBoxFlat_quo4g")
+GraphNode/styles/titlebar_selected = SubResource("StyleBoxFlat_lhxbj")

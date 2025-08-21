@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="dialogueSettings" load_steps=2 format=3 uid="uid://bf0l0ipvqec58"]
+
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/settings.gd" id="1_rg2a4"]
+
+[resource]
+script = ExtResource("1_rg2a4")
+current_dialogue_data_path = "res://addons/weekendDialogue/Examples/Example Dialogue.tres"
+metadata/_custom_type_script = ExtResource("1_rg2a4")

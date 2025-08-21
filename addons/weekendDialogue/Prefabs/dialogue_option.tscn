@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://da0digpeup2bd"]
+
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/DialogeOptionUI.gd" id="1_0a03l"]
+
+[node name="Option1" type="HBoxContainer"]
+offset_right = 218.0
+offset_bottom = 37.0
+script = ExtResource("1_0a03l")
+
+[node name="Delete_button" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40.22, 0)
+layout_mode = 2
+text = "X"
+
+[node name="Option Text" type="LineEdit" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 37.62)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Value"
+expand_to_text_length = true

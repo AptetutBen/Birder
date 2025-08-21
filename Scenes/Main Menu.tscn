@@ -1,0 +1,552 @@
+[gd_scene load_steps=15 format=3 uid="uid://di0ixdytwx1hv"]
+
+[ext_resource type="Script" uid="uid://d1iet8fngqlty" path="res://Scripts/Main Menu/MainMenuController.gd" id="1_6svde"]
+[ext_resource type="Theme" uid="uid://c7vaw5wq61pbh" path="res://Themes/UI.tres" id="2_0126h"]
+[ext_resource type="Texture2D" uid="uid://r50oq5df1ugk" path="res://Sprites/UI/UI Panels.png" id="4_4lp62"]
+[ext_resource type="Script" uid="uid://c0igtkxsnjsgj" path="res://Scripts/UI/TextButtonGroup.gd" id="4_88j2r"]
+[ext_resource type="Script" uid="uid://cqfqww5rcrh8n" path="res://Scripts/UI/MenuText.gd" id="5_j2368"]
+[ext_resource type="Script" uid="uid://uf3cadaffo2s" path="res://Scripts/UI/MenuTextRange.gd" id="6_8dboa"]
+[ext_resource type="Script" uid="uid://chars5jgkxrdx" path="res://Scripts/UI/MenuTextToggle.gd" id="7_4lp62"]
+[ext_resource type="Script" uid="uid://c1uaa211xtggr" path="res://Scripts/UI/CreditsPanel.gd" id="10_wib81"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vewo"]
+atlas = ExtResource("4_4lp62")
+region = Rect2(749.35, 500.675, 140.8, 68.2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0126h"]
+atlas = ExtResource("4_4lp62")
+region = Rect2(746.7, 424.2, 149.6, 72.6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4glhd"]
+atlas = ExtResource("4_4lp62")
+region = Rect2(917.375, 271.373, 245.569, 96.4975)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5svr"]
+atlas = ExtResource("4_4lp62")
+region = Rect2(917.375, 271.373, 245.569, 96.4975)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lp62"]
+atlas = ExtResource("4_4lp62")
+region = Rect2(746.615, 426.487, 149.077, 70.1538)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wib81"]
+atlas = ExtResource("4_4lp62")
+region = Rect2(748.05, 498.05, 152.9, 75.35)
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00149, 1)
+script = ExtResource("1_6svde")
+
+[node name="Options" type="Node" parent="."]
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 560.0
+offset_top = 45.0
+offset_right = -61.0
+offset_bottom = -453.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0126h")
+theme_type_variation = &"Heading"
+text = "Game Title"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Main Buttons" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 109.0
+offset_top = 247.0
+offset_right = -839.0
+offset_bottom = -129.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_88j2r")
+active = true
+
+[node name="Start Button" type="Control" parent="Main Buttons"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("5_j2368")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Main Buttons/Start Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 4.0
+offset_top = -3.0
+offset_right = 161.0
+offset_bottom = 73.0
+texture = SubResource("AtlasTexture_0vewo")
+
+[node name="Start Button" type="RichTextLabel" parent="Main Buttons/Start Button"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 206.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Start
+"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Options Button" type="Control" parent="Main Buttons"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("5_j2368")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Main Buttons/Options Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 1.9974
+offset_top = -5.0
+offset_right = 199.997
+offset_bottom = 78.0
+texture = SubResource("AtlasTexture_0126h")
+
+[node name="Start Button" type="RichTextLabel" parent="Main Buttons/Options Button"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 206.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Options"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Credits Button" type="Control" parent="Main Buttons"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("5_j2368")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Main Buttons/Credits Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 9.0
+offset_top = -2.0
+offset_right = 190.0
+offset_bottom = 72.0
+texture = SubResource("AtlasTexture_0vewo")
+
+[node name="Start Button" type="RichTextLabel" parent="Main Buttons/Credits Button"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 206.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Credits"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Exit Button" type="Control" parent="Main Buttons"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("5_j2368")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Main Buttons/Exit Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 6.0
+offset_top = 1.0
+offset_right = 146.0
+offset_bottom = 69.0
+texture = SubResource("AtlasTexture_0vewo")
+
+[node name="Start Button" type="RichTextLabel" parent="Main Buttons/Exit Button"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 206.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Exit"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Options Buttons" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 385.0
+offset_top = 286.0
+offset_right = -358.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_88j2r")
+close_on_left = true
+metadata/_edit_group_ = true
+
+[node name="Game Volume" type="RichTextLabel" parent="Options Buttons"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Game Volume"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("6_8dboa")
+highlight_action = 2
+
+[node name="Range Text" type="RichTextLabel" parent="Options Buttons/Game Volume"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 293.563
+offset_top = -1.0
+offset_right = 449.563
+offset_bottom = 63.9
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "10%"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Options Buttons/Game Volume"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 0
+offset_left = -26.0
+offset_top = -5.0
+offset_right = 280.0
+offset_bottom = 68.0
+texture = SubResource("AtlasTexture_4glhd")
+expand_mode = 1
+flip_h = true
+
+[node name="Music Volume" type="RichTextLabel" parent="Options Buttons"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Music Volume"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("6_8dboa")
+highlight_action = 2
+
+[node name="Range Text" type="RichTextLabel" parent="Options Buttons/Music Volume"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 293.563
+offset_top = -1.0
+offset_right = 449.563
+offset_bottom = 63.9
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "10%"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Options Buttons/Music Volume"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 0
+offset_left = -20.0
+offset_top = -4.0
+offset_right = 279.0
+offset_bottom = 68.0
+texture = SubResource("AtlasTexture_4glhd")
+expand_mode = 1
+
+[node name="SFX Volume" type="RichTextLabel" parent="Options Buttons"]
+unique_name_in_owner = true
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "SFX Volume"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("6_8dboa")
+highlight_action = 2
+
+[node name="Range Text" type="RichTextLabel" parent="Options Buttons/SFX Volume"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 293.563
+offset_top = -1.0
+offset_right = 449.563
+offset_bottom = 63.9
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "10%"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Options Buttons/SFX Volume"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 0
+offset_left = -20.0
+offset_top = -4.0
+offset_right = 228.0
+offset_bottom = 65.0
+texture = SubResource("AtlasTexture_g5svr")
+expand_mode = 1
+flip_v = true
+
+[node name="Fullscreen Button" type="RichTextLabel" parent="Options Buttons"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Fullscreen"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("7_4lp62")
+highlight_action = 2
+
+[node name="Toggle Text" type="RichTextLabel" parent="Options Buttons/Fullscreen Button"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 293.563
+offset_top = -1.0
+offset_right = 449.563
+offset_bottom = 63.9
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "On"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Options Buttons/Fullscreen Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 0
+offset_left = -23.0
+offset_top = -8.0
+offset_right = 224.0
+offset_bottom = 79.0
+texture = SubResource("AtlasTexture_4lp62")
+expand_mode = 1
+
+[node name="Vsync Toggle" type="RichTextLabel" parent="Options Buttons"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Vsync"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("7_4lp62")
+highlight_action = 2
+
+[node name="Toggle Text" type="RichTextLabel" parent="Options Buttons/Vsync Toggle"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 293.563
+offset_top = -1.0
+offset_right = 449.563
+offset_bottom = 63.9
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "On"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Options Buttons/Vsync Toggle"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 0
+offset_left = -23.0
+offset_top = -3.0
+offset_right = 162.0
+offset_bottom = 77.0
+texture = SubResource("AtlasTexture_wib81")
+expand_mode = 1
+
+[node name="Back Button" type="RichTextLabel" parent="Options Buttons"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+theme = ExtResource("2_0126h")
+theme_override_constants/shadow_offset_x = 6
+bbcode_enabled = true
+text = "Back"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("5_j2368")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Options Buttons/Back Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 0
+offset_left = -23.9643
+offset_top = -3.0
+offset_right = 133.036
+offset_bottom = 73.0
+texture = SubResource("AtlasTexture_0vewo")
+
+[node name="Credits" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -176.0
+offset_top = -401.0
+offset_right = 444.0
+offset_bottom = -115.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("10_wib81")
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("2_0126h")
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "[center][b]Credits[/b][/center]
+
+Welcome to the Godot 4.4 template project made for the 2025 Global Game Jam.
+
+This template contains:
+- A splash screen
+- Main menu with menu system and options
+- Audio Manager
+- Save controller with game, settings and etherial saving
+- Pause menu
+- Loading screen
+- In game terminal for ease of debugging, commands new commands can be added easily
+- Dialogue system editor with example dialogue UI
+- Google sheets downloader for storing data on a google sheet
+
+This template is distributed under the CC BY-NC-SA licence.
+
+Contact me at ben@no-weekend.com."
+
+[node name="Close Button" type="Control" parent="Credits"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 489.0
+offset_top = 299.0
+offset_right = 645.0
+offset_bottom = 364.0
+script = ExtResource("5_j2368")
+
+[node name="TextureRect" type="TextureRect" parent="Credits/Close Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 2.0
+offset_top = -5.0
+offset_right = 151.0
+offset_bottom = 67.0
+texture = SubResource("AtlasTexture_0126h")
+
+[node name="Start Button" type="RichTextLabel" parent="Credits/Close Button"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 206.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_0126h")
+bbcode_enabled = true
+text = "Close"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Version Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0001
+offset_top = -30.0
+offset_right = -8.00012
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_0126h")
+theme_override_font_sizes/font_size = 15
+text = "v 0.1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[connection signal="buttonAction" from="Main Buttons/Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="buttonAction" from="Main Buttons/Options Button" to="." method="_on_options_button_pressed"]
+[connection signal="buttonAction" from="Main Buttons/Credits Button" to="." method="_on_credits_button_pressed"]
+[connection signal="buttonAction" from="Main Buttons/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="close_action" from="Options Buttons" to="." method="_on_back_button_button_action"]
+[connection signal="buttonAction" from="Options Buttons/Game Volume" to="." method="_on_master_volume_click"]
+[connection signal="buttonAction" from="Options Buttons/Music Volume" to="." method="_on_music_volume_click"]
+[connection signal="buttonAction" from="Options Buttons/SFX Volume" to="." method="_on_sfx_volume_click"]
+[connection signal="button_toggle_action" from="Options Buttons/Fullscreen Button" to="." method="_fullscreen_toggled"]
+[connection signal="button_toggle_action" from="Options Buttons/Vsync Toggle" to="." method="_vsync_toggled"]
+[connection signal="buttonAction" from="Options Buttons/Back Button" to="Options Buttons" method="_on_close"]
+[connection signal="close_action" from="Credits" to="." method="_on_close_credits_button_pressed"]
+[connection signal="buttonAction" from="Credits/Close Button" to="." method="_on_close_credits_button_pressed"]

@@ -1,0 +1,284 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4i8gaa812i43"]
+
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/weekendDialogueEditor.gd" id="1_hfyfc"]
+[ext_resource type="PackedScene" uid="uid://cufx4633uoge0" path="res://addons/weekendDialogue/Prefabs/conversation_node.tscn" id="2_ewb42"]
+[ext_resource type="PackedScene" uid="uid://degb4wkppnlpv" path="res://addons/weekendDialogue/Prefabs/start_node.tscn" id="5_5axue"]
+[ext_resource type="PackedScene" uid="uid://b55u1mq86cmfu" path="res://addons/weekendDialogue/Prefabs/get_variable_node.tscn" id="5_ewb42"]
+[ext_resource type="Resource" uid="uid://bf0l0ipvqec58" path="res://addons/weekendDialogue/settings.tres" id="6_janmk"]
+[ext_resource type="PackedScene" uid="uid://bp6ak451eog5l" path="res://addons/weekendDialogue/Prefabs/set_variable_node.tscn" id="6_s2syb"]
+[ext_resource type="PackedScene" uid="uid://cr4v61ty3q5wg" path="res://addons/weekendDialogue/Prefabs/text_editor.tscn" id="7_uu681"]
+[ext_resource type="Resource" uid="uid://crtmtk8jti3gq" path="res://addons/weekendDialogue/Examples/Example Dialogue.tres" id="8_nkwce"]
+[ext_resource type="Script" path="res://addons/weekendDialogue/Scripts/node_popup_menu.gd" id="8_uu681"]
+[ext_resource type="PackedScene" uid="uid://i0vfncqcp0lx" path="res://addons/weekendDialogue/Prefabs/compare_variable_node.tscn" id="9_aycla"]
+[ext_resource type="Theme" uid="uid://di2blioe5dqny" path="res://addons/weekendDialogue/Themes/NodeTheme.tres" id="10_hu7hx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efhne"]
+bg_color = Color(0.0920593, 0.0233568, 0.0649891, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.717647, 0.196078, 0.105882, 1)
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lmvo"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 3.0
+content_margin_bottom = 10.0
+bg_color = Color(0.386777, 0.113947, 0.146998, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color(0.8, 0.215686, 0.0901961, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[node name="DialogueGraph" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hfyfc")
+dialogueConversationNodePrefab = ExtResource("2_ewb42")
+dialogueStartNodePrefab = ExtResource("5_5axue")
+dialogueSetVariableNodePrefab = ExtResource("6_s2syb")
+dialogueGetVariableNodePrefab = ExtResource("5_ewb42")
+dialogueCompareVariableNodePrefab = ExtResource("9_aycla")
+settings = ExtResource("6_janmk")
+dialogue_data = ExtResource("8_nkwce")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 33.66)
+layout_mode = 2
+
+[node name="Add Node" type="Button" parent="VBoxContainer/Header"]
+custom_minimum_size = Vector2(153.03, 0)
+layout_mode = 2
+text = "Add Node +"
+
+[node name="Save Button" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(153.03, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Save"
+
+[node name="Main Panel" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Size Panel" type="Panel" parent="VBoxContainer/Main Panel"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Main Panel/Size Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Open File Button" type="Button" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Open File"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="File Name Label" type="Label" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Example Dialogue.tres"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Characters"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Select Character File"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Control" type="MarginContainer" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer/Control"]
+layout_mode = 2
+
+[node name="Character Name" type="TextEdit" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 38.67)
+layout_mode = 2
+placeholder_text = "Character Name:"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 166.36)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer/Control/VBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 8.0
+offset_right = 116.0
+offset_bottom = 119.0
+color = Color(0.31, 0.31, 0.31, 1)
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer/Control/VBoxContainer/Panel/ColorRect"]
+custom_minimum_size = Vector2(50.4, 96.99)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer/Control/VBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 85.0
+offset_right = 113.0
+offset_bottom = 116.0
+text = "+"
+
+[node name="Label" type="Label" parent="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/VBoxContainer/Control/VBoxContainer/Panel"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 135.0
+offset_right = 181.0
+offset_bottom = 158.0
+text = "File name"
+
+[node name="Dialogue Editor" type="GraphEdit" parent="VBoxContainer/Main Panel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+connections = Array[Dictionary]([{
+"from_node": &"Dialogue Node_2",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"Set Variable Node_3",
+"to_port": 0
+}, {
+"from_node": &"Compare Variable Node_4",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"Dialogue Node_2",
+"to_port": 0
+}, {
+"from_node": &"Start Node_0",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"Compare Variable Node_4",
+"to_port": 0
+}, {
+"from_node": &"Compare Variable Node_4",
+"from_port": 1,
+"keep_alive": false,
+"to_node": &"Dialogue Node_5",
+"to_port": 0
+}, {
+"from_node": &"Start Node_1",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"Dialogue Node_2",
+"to_port": 0
+}])
+
+[node name="Text Editor" parent="VBoxContainer/Main Panel/Dialogue Editor" instance=ExtResource("7_uu681")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 241.0
+offset_top = 145.0
+offset_right = 627.0
+offset_bottom = 433.0
+theme = ExtResource("10_hu7hx")
+theme_override_styles/panel = SubResource("StyleBoxFlat_efhne")
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_1lmvo")
+position_offset = Vector2(241, 145)
+title = "WYSIWYG Text Editor"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tres")
+
+[node name="Add Menu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+position = Vector2i(510, 300)
+size = Vector2i(190, 143)
+hide_on_state_item_selection = true
+item_count = 5
+item_0/text = "Start"
+item_0/id = 0
+item_1/text = "Conversation"
+item_1/id = 1
+item_2/text = "Get Variable"
+item_2/id = 2
+item_3/text = "Compare Variable"
+item_3/id = 3
+item_4/text = "Set Variable"
+item_4/id = 4
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+position = Vector2i(510, 300)
+size = Vector2i(100, 35)
+hide_on_state_item_selection = true
+item_count = 1
+item_0/text = "Delete"
+item_0/id = 0
+script = ExtResource("8_uu681")
+
+[connection signal="pressed" from="VBoxContainer/Header/Add Node" to="." method="_on_add_node_pressed"]
+[connection signal="pressed" from="VBoxContainer/Header/Save Button" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="VBoxContainer/Main Panel/Size Panel/MarginContainer/VBoxContainer/Open File Button" to="." method="_on_open_file"]
+[connection signal="connection_from_empty" from="VBoxContainer/Main Panel/Dialogue Editor" to="." method="_on_dialogue_editor_connection_from_empty"]
+[connection signal="connection_request" from="VBoxContainer/Main Panel/Dialogue Editor" to="." method="_on_dialogue_editor_connection_request"]
+[connection signal="connection_to_empty" from="VBoxContainer/Main Panel/Dialogue Editor" to="." method="_on_dialogue_editor_connection_to_empty"]
+[connection signal="delete_nodes_request" from="VBoxContainer/Main Panel/Dialogue Editor" to="." method="_on_dialogue_editor_delete_nodes_request"]
+[connection signal="disconnection_request" from="VBoxContainer/Main Panel/Dialogue Editor" to="." method="_on_dialogue_editor_disconnection_request"]
+[connection signal="id_pressed" from="Add Menu" to="." method="_on_add_menu_id_pressed"]
+[connection signal="click_button" from="PopupMenu" to="." method="_on_add_menu_id_pressed"]
+[connection signal="id_pressed" from="PopupMenu" to="PopupMenu" method="_on_id_pressed"]

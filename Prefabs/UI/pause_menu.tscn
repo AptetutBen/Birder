@@ -1,0 +1,265 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5j0pg0krwk4t"]
+
+[ext_resource type="Script" uid="uid://7oni0icddkt3" path="res://Scripts/Pause Menu/PauseMenu.gd" id="1_tm1hf"]
+[ext_resource type="Theme" uid="uid://c7vaw5wq61pbh" path="res://Themes/UI.tres" id="2_b0cm4"]
+[ext_resource type="Script" uid="uid://c0igtkxsnjsgj" path="res://Scripts/UI/TextButtonGroup.gd" id="4_n7qms"]
+[ext_resource type="Texture2D" uid="uid://r50oq5df1ugk" path="res://Sprites/UI/UI Panels.png" id="5_oadjm"]
+[ext_resource type="Script" uid="uid://cqfqww5rcrh8n" path="res://Scripts/UI/MenuText.gd" id="6_jy3lh"]
+
+[sub_resource type="Gradient" id="Gradient_e2pts"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xadrl"]
+gradient = SubResource("Gradient_e2pts")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b0cm4"]
+load_path = "res://.godot/imported/UI Panels.png-17c8bb09e97e53bd07c6333344113af1.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u50t2"]
+atlas = SubResource("CompressedTexture2D_b0cm4")
+region = Rect2(909.443, 273.035, 253.333, 91.2354)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oadjm"]
+atlas = SubResource("CompressedTexture2D_b0cm4")
+region = Rect2(746.527, 420.863, 154.126, 73.5198)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gad4m"]
+atlas = ExtResource("5_oadjm")
+region = Rect2(748, 498.75, 143.5, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvnbd"]
+atlas = SubResource("CompressedTexture2D_b0cm4")
+region = Rect2(745.641, 419.091, 154.126, 77.0629)
+
+[node name="Pause Menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tm1hf")
+
+[node name="Gradient" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 603.0
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_xadrl")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 338.0
+grow_vertical = 2
+color = Color(0.0357173, 0.100152, 0.126787, 1)
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = 71.0
+offset_right = -846.0
+offset_bottom = -448.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_b0cm4")
+theme_type_variation = &"Heading"
+text = "Paused"
+vertical_alignment = 1
+
+[node name="Button Group" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 286.0
+offset_right = -898.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_n7qms")
+active = true
+open_on_right = true
+
+[node name="Resume Button" type="Control" parent="Button Group"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("6_jy3lh")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Button Group/Resume Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 198.0
+offset_bottom = 69.0
+texture = SubResource("AtlasTexture_u50t2")
+expand_mode = 1
+
+[node name="Text" type="RichTextLabel" parent="Button Group/Resume Button"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 126.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_b0cm4")
+bbcode_enabled = true
+text = "Resume"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Debug Menu" type="Control" parent="Button Group"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("6_jy3lh")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Button Group/Debug Menu"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 4.0
+offset_top = -9.0
+offset_right = 190.0
+offset_bottom = 75.0
+texture = SubResource("AtlasTexture_oadjm")
+
+[node name="Text" type="RichTextLabel" parent="Button Group/Debug Menu"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 126.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_b0cm4")
+bbcode_enabled = true
+text = "Debug"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Quit Button" type="Control" parent="Button Group"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("6_jy3lh")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Button Group/Quit Button"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 4.0
+offset_top = -3.5
+offset_right = 147.0
+offset_bottom = 68.5
+texture = SubResource("AtlasTexture_gad4m")
+
+[node name="Text" type="RichTextLabel" parent="Button Group/Quit Button"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 126.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_b0cm4")
+bbcode_enabled = true
+text = "Quit"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Debug Group" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 232.0
+offset_right = -612.0
+offset_bottom = -266.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_n7qms")
+close_on_left = true
+
+[node name="Reset Data" type="Control" parent="Debug Group"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("6_jy3lh")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Debug Group/Reset Data"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 270.0
+offset_bottom = 67.0
+texture = SubResource("AtlasTexture_u50t2")
+expand_mode = 1
+
+[node name="Text" type="RichTextLabel" parent="Debug Group/Reset Data"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 126.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_b0cm4")
+bbcode_enabled = true
+text = "Reset Data"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Back" type="Control" parent="Debug Group"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("6_jy3lh")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Debug Group/Back"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 2
+offset_left = 4.0
+offset_top = -7.0
+offset_right = 158.0
+offset_bottom = 70.0
+texture = SubResource("AtlasTexture_vvnbd")
+
+[node name="Text" type="RichTextLabel" parent="Debug Group/Back"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 30.0
+offset_right = 126.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_b0cm4")
+bbcode_enabled = true
+text = "Back"
+scroll_active = false
+autowrap_mode = 0
+
+[connection signal="buttonAction" from="Button Group/Resume Button" to="." method="_on_resume_button_button_action"]
+[connection signal="buttonAction" from="Button Group/Debug Menu" to="." method="_on_debug_menu_button_action"]
+[connection signal="buttonAction" from="Button Group/Quit Button" to="." method="_on_quit_button_button_action"]
+[connection signal="close_action" from="Debug Group" to="." method="_on_close_debug_menu"]
+[connection signal="buttonAction" from="Debug Group/Reset Data" to="." method="_on_reset_data_button_action"]
+[connection signal="buttonAction" from="Debug Group/Back" to="Debug Group" method="_on_close"]

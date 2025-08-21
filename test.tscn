@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxj16vfgvjgp8"]
+
+[ext_resource type="Theme" uid="uid://c7vaw5wq61pbh" path="res://Themes/UI.tres" id="1_4kf0n"]
+[ext_resource type="Script" uid="uid://chars5jgkxrdx" path="res://Scripts/UI/MenuTextToggle.gd" id="2_qetp0"]
+[ext_resource type="Texture2D" uid="uid://r50oq5df1ugk" path="res://Sprites/UI/UI Panels.png" id="3_gcrwh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqsl1"]
+atlas = ExtResource("3_gcrwh")
+region = Rect2(748.05, 498.05, 152.9, 75.35)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vsync Toggle" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 0
+theme = ExtResource("1_4kf0n")
+bbcode_enabled = true
+text = "Vsync"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("2_qetp0")
+
+[node name="Toggle Text" type="RichTextLabel" parent="Vsync Toggle"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 2
+offset_left = 293.563
+offset_top = -1.0
+offset_right = 449.563
+offset_bottom = 63.9
+theme = ExtResource("1_4kf0n")
+bbcode_enabled = true
+text = "On"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Vsync Toggle"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 0
+offset_left = -23.0
+offset_top = -3.0
+offset_right = 162.0
+offset_bottom = 77.0
+texture = SubResource("AtlasTexture_hqsl1")
+expand_mode = 1

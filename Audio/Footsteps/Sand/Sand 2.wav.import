@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ciecpkyb3qqb0"
+path="res://.godot/imported/Sand 2.wav-5739d4b03b6e6d3c2385109f7e34059d.sample"
+
+[deps]
+
+source_file="res://Audio/Footsteps/Sand/Sand 2.wav"
+dest_files=["res://.godot/imported/Sand 2.wav-5739d4b03b6e6d3c2385109f7e34059d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
