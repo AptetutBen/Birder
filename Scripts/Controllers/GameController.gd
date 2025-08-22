@@ -10,6 +10,7 @@ func _ready() -> void:
 
 	# Set singleton
 	Instance = self
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	
 	# Always turn off debug when game is built 
 	if !OS.has_feature("debug"):

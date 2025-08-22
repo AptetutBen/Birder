@@ -15,6 +15,7 @@ extends Control
 
 
 func _ready():
+	Input.mouse_mode =Input.MOUSE_MODE_VISIBLE
 	AudioManager.play_music("Menu Music")
 	credits.hide()
 	options_buttons.hide()

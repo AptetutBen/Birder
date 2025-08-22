@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://di0ixdytwx1hv"]
 
-[ext_resource type="Script" uid="uid://d1iet8fngqlty" path="res://Scripts/Main Menu/MainMenuController.gd" id="1_6svde"]
+[ext_resource type="Script" uid="uid://d1iet8fngqlty" path="res://Scripts/MainMenuController.gd" id="1_6svde"]
 [ext_resource type="Theme" uid="uid://c7vaw5wq61pbh" path="res://Themes/UI.tres" id="2_0126h"]
 [ext_resource type="Texture2D" uid="uid://r50oq5df1ugk" path="res://Sprites/UI/UI Panels.png" id="4_4lp62"]
 [ext_resource type="Script" uid="uid://c0igtkxsnjsgj" path="res://Scripts/UI/TextButtonGroup.gd" id="4_88j2r"]
@@ -47,7 +47,7 @@ script = ExtResource("1_6svde")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 560.0
@@ -65,7 +65,7 @@ vertical_alignment = 1
 [node name="Main Buttons" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 109.0
@@ -86,7 +86,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Main Buttons/Start Button"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 4.0
 offset_top = -3.0
 offset_right = 161.0
@@ -96,7 +96,7 @@ texture = SubResource("AtlasTexture_0vewo")
 [node name="Start Button" type="RichTextLabel" parent="Main Buttons/Start Button"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 206.0
 offset_bottom = 65.0
@@ -117,7 +117,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Main Buttons/Options Button"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 1.9974
 offset_top = -5.0
 offset_right = 199.997
@@ -127,7 +127,7 @@ texture = SubResource("AtlasTexture_0126h")
 [node name="Start Button" type="RichTextLabel" parent="Main Buttons/Options Button"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 206.0
 offset_bottom = 65.0
@@ -147,7 +147,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Main Buttons/Credits Button"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 9.0
 offset_top = -2.0
 offset_right = 190.0
@@ -157,7 +157,7 @@ texture = SubResource("AtlasTexture_0vewo")
 [node name="Start Button" type="RichTextLabel" parent="Main Buttons/Credits Button"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 206.0
 offset_bottom = 65.0
@@ -177,7 +177,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Main Buttons/Exit Button"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 6.0
 offset_top = 1.0
 offset_right = 146.0
@@ -187,7 +187,7 @@ texture = SubResource("AtlasTexture_0vewo")
 [node name="Start Button" type="RichTextLabel" parent="Main Buttons/Exit Button"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 206.0
 offset_bottom = 65.0
@@ -201,7 +201,7 @@ autowrap_mode = 0
 [node name="Options Buttons" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 385.0
@@ -230,7 +230,7 @@ highlight_action = 2
 [node name="Range Text" type="RichTextLabel" parent="Options Buttons/Game Volume"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 293.563
 offset_top = -1.0
 offset_right = 449.563
@@ -270,7 +270,7 @@ highlight_action = 2
 [node name="Range Text" type="RichTextLabel" parent="Options Buttons/Music Volume"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 293.563
 offset_top = -1.0
 offset_right = 449.563
@@ -310,7 +310,7 @@ highlight_action = 2
 [node name="Range Text" type="RichTextLabel" parent="Options Buttons/SFX Volume"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 293.563
 offset_top = -1.0
 offset_right = 449.563
@@ -350,7 +350,7 @@ highlight_action = 2
 [node name="Toggle Text" type="RichTextLabel" parent="Options Buttons/Fullscreen Button"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 293.563
 offset_top = -1.0
 offset_right = 449.563
@@ -389,7 +389,7 @@ highlight_action = 2
 [node name="Toggle Text" type="RichTextLabel" parent="Options Buttons/Vsync Toggle"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 293.563
 offset_top = -1.0
 offset_right = 449.563
@@ -440,7 +440,7 @@ texture = SubResource("AtlasTexture_0vewo")
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -486,8 +486,7 @@ Contact me at ben@no-weekend.com."
 
 [node name="Close Button" type="Control" parent="Credits"]
 custom_minimum_size = Vector2(0, 65)
-layout_mode = 3
-anchors_preset = 0
+layout_mode = 1
 offset_left = 489.0
 offset_top = 299.0
 offset_right = 645.0
@@ -497,7 +496,7 @@ script = ExtResource("5_j2368")
 [node name="TextureRect" type="TextureRect" parent="Credits/Close Button"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 2.0
 offset_top = -5.0
 offset_right = 151.0
@@ -507,7 +506,7 @@ texture = SubResource("AtlasTexture_0126h")
 [node name="Start Button" type="RichTextLabel" parent="Credits/Close Button"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 206.0
 offset_bottom = 65.0
@@ -520,7 +519,7 @@ autowrap_mode = 0
 
 [node name="Version Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

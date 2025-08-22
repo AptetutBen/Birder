@@ -27,7 +27,7 @@ var current_lens := "standard"
 @onready var auto_focus_ray: RayCast3D = %AutoFocusRay
 @onready var viewport: SubViewport = %Viewport
 @onready var shutter_sound: AudioStreamPlayer2D = %ShutterSound
-@onready var obj_debug: ObjFinder = %ObjFinder
+#@onready var obj_debug: ObjFinder = %ObjFinder
 
 @export var focus_speed: float = 10.0    # how fast to adjust focus target (m/s)
 @export var focus_lerp_speed: float = 6.0 # how fast actual focus catches up
@@ -203,15 +203,16 @@ func capture_camera() -> Image:
 	return img
 
 func draw_obj_debugs(obj : Node3D) -> void:
-	var obj_pos = obj.global_transform.origin 
-	if !camera_3d.is_position_in_frustum(obj_pos):
-		obj_debug.objects = []
-		return
-	var screen_pos : Vector2 = camera_3d.unproject_position(obj_pos)
-	
-	obj_debug.objects = [screen_pos]
-	var obj_rect = get_object_screen_rect(obj)
-	obj_debug.draw_debug(obj_rect,screen_pos)
+	pass
+	#var obj_pos = obj.global_transform.origin 
+	#if !camera_3d.is_position_in_frustum(obj_pos):
+		#obj_debug.objects = []
+		#return
+	#var screen_pos : Vector2 = camera_3d.unproject_position(obj_pos)
+	#
+	#obj_debug.objects = [screen_pos]
+	#var obj_rect = get_object_screen_rect(obj)
+	#obj_debug.draw_debug(obj_rect,screen_pos)
 	
 
 func get_object_screen_rect(important_obj) -> Rect2:

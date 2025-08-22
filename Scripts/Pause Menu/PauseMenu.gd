@@ -5,6 +5,9 @@ extends Control
 
 @onready var debug_menu: MenuText = %"Debug Menu"
 
+var previous_mouse_mode
+
+
 func _ready() -> void:
 	visible = false
 	await get_tree().process_frame
@@ -25,11 +28,14 @@ func _input(event: InputEvent) -> void:
 			#button_group.select_button(0, false)
 
 func _pause():
+	previous_mouse_mode = Input.mouse_mode
+	Input.mouse_mode =Input.MOUSE_MODE_VISIBLE
 	FlowController.pause_game(self)
 	visible = true
 	button_group.enable()
 
 func _unpause():
+	Input.mouse_mode = previous_mouse_mode
 	FlowController.unpause_game()
 	visible = false
 

@@ -16,7 +16,7 @@ var is_camera_up : bool = false
 
 func _ready():
 	# Capture the mouse
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.position = camera_down_marker.position
 
 func _process(_delta: float) -> void:
@@ -47,13 +47,13 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	var input_dir = Vector3.ZERO
-	if Input.is_action_pressed("MoveForward"):
+	if Input.is_action_pressed("Move Up"):
 		input_dir -= transform.basis.z
-	if Input.is_action_pressed("MoveBackwards"):
+	if Input.is_action_pressed("Move Down"):
 		input_dir += transform.basis.z
-	if Input.is_action_pressed("MoveLeft"):
+	if Input.is_action_pressed("Move Left"):
 		input_dir -= transform.basis.x
-	if Input.is_action_pressed("MoveRight"):
+	if Input.is_action_pressed("Move Right"):
 		input_dir += transform.basis.x
 
 	# Normalize so diagonal isn’t faster
@@ -64,8 +64,8 @@ func _physics_process(delta):
 		velocity_y -= gravity * delta
 	else:
 		velocity_y = 0
-		if Input.is_action_just_pressed("Jump"):
-			velocity_y = jump_strength
+		#if Input.is_action_just_pressed("Jump"):
+			#velocity_y = jump_strength
 
 	# Final velocity
 	velocity = input_dir * speed

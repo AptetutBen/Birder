@@ -2,9 +2,7 @@ extends Node
 
 var audio_source : AudioStreamPlayer2D
 
-
 func _ready() -> void:
-	
 	audio_source = AudioManager.play_sfx("Weekend Sting")
 	await audio_source.finished
 	FlowController.load_main_menu()

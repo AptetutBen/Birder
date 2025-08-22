@@ -43,7 +43,7 @@ func _ready():
 func start_game() -> void:
 	started_from_main_menu = true
 	active_pause_panel = null
-	load_scene("Game",true)
+	load_scene("Main Game",true)
 
 # Pausing the game
 func pause_game(active_panel : Node = null) -> void:
