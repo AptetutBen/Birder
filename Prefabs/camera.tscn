@@ -1,0 +1,122 @@
+[gd_scene load_steps=13 format=3 uid="uid://dw1a7mhovoxaa"]
+
+[ext_resource type="Script" uid="uid://bbrmgy2hmh6dl" path="res://Scripts/Resources/Camera.gd" id="1_q05pk"]
+[ext_resource type="PackedScene" uid="uid://xfxci40wh8qs" path="res://Prefabs/Flashes/basic_flash.tscn" id="3_rfq4l"]
+[ext_resource type="PackedScene" uid="uid://c3b22dvufgivt" path="res://Prefabs/Attachments/Viewfinders/direct_optical_viewfinder_2.tscn" id="4_rfq4l"]
+[ext_resource type="AudioStream" uid="uid://b8jx6lclt34k1" path="res://Audio/SFX/Shutter.mp3" id="5_lp8pq"]
+[ext_resource type="PackedScene" uid="uid://dgagx4mrprcav" path="res://Prefabs/Attachments/Viewfinders/basic_lcd_viewfinder.tscn" id="5_rfq4l"]
+[ext_resource type="Script" uid="uid://cjajtfex3c0ef" path="res://Scripts/ObjFinderDebug.gd" id="6_rfq4l"]
+[ext_resource type="Shader" uid="uid://7y820ylqqf1i" path="res://Shaders/camera_lens.gdshader" id="7_uk7ky"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kbofq"]
+size = Vector3(0.14, 0.11, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfq4l"]
+albedo_color = Color(0.35728207, 0.20526177, 0.16725667, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a202f"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.02
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_noarx"]
+dof_blur_far_enabled = true
+dof_blur_near_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0b32j"]
+shader = ExtResource("7_uk7ky")
+shader_parameter/flash_strength = 0.9110000432725
+shader_parameter/green_shift = 0.05
+shader_parameter/bloom_strength = 0.7650000363375
+
+[node name="Camera" type="Node3D" node_paths=PackedStringArray("flash", "view_finder")]
+script = ExtResource("1_q05pk")
+transition_speed = 12.0
+focus_speed = 50.0
+flash = NodePath("Body/Flash")
+view_finder = NodePath("Body/LCD Viewfinder")
+draw_debug = true
+
+[node name="AutoFocusRay" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03213334)
+target_position = Vector3(0, 0, -30)
+hit_back_faces = false
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_kbofq")
+surface_material_override/0 = SubResource("StandardMaterial3D_rfq4l")
+
+[node name="Flash Attach Point" type="Marker3D" parent="Body"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058934182, 0.045753665, -0.03584531)
+
+[node name="Lens Attach Point" type="Marker3D" parent="Body"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03685163)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Body/Lens Attach Point"]
+remote_path = NodePath("../../../CameraLens/Viewport/Camera3D")
+update_scale = false
+
+[node name="Viewfinder Attach Point" type="Marker3D" parent="Body"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.035529792)
+
+[node name="Film AttachPoint" type="Marker3D" parent="Body"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06974363, 0, 0)
+
+[node name="ShutterSound" type="AudioStreamPlayer2D" parent="Body"]
+unique_name_in_owner = true
+stream = ExtResource("5_lp8pq")
+
+[node name="Flash" parent="Body" instance=ExtResource("3_rfq4l")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058934182, 0.045753665, -0.03584531)
+visible = false
+
+[node name="Direct Optical Viewfinder2" parent="Body" instance=ExtResource("4_rfq4l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.035529792)
+visible = false
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.03685163)
+layers = 2
+mesh = SubResource("CylinderMesh_a202f")
+
+[node name="LCD Viewfinder" parent="Body" instance=ExtResource("5_rfq4l")]
+
+[node name="CameraLens" type="Node3D" parent="."]
+
+[node name="Viewport" type="SubViewport" parent="CameraLens"]
+unique_name_in_owner = true
+size = Vector2i(1024, 769)
+
+[node name="Camera3D" type="Camera3D" parent="CameraLens/Viewport"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03685163)
+attributes = SubResource("CameraAttributesPractical_noarx")
+fov = 60.071587
+
+[node name="Lens" type="CanvasLayer" parent="CameraLens/Viewport"]
+visible = false
+
+[node name="PostProcessing" type="ColorRect" parent="CameraLens/Viewport/Lens"]
+material = SubResource("ShaderMaterial_0b32j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Debug Canvas" type="CanvasLayer" parent="CameraLens/Viewport"]
+
+[node name="ObjFinder" type="Control" parent="CameraLens/Viewport/Debug Canvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_rfq4l")

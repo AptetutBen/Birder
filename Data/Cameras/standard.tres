@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CameraSettings" load_steps=2 format=3 uid="uid://jgoho4rq3psy"]
+
+[ext_resource type="Script" uid="uid://bkwev2goyta43" path="res://Scripts/CameraSettings.gd" id="1_xxrh2"]
+
+[resource]
+script = ExtResource("1_xxrh2")
+name = "Standard"
+has_infinate_focus = true
+blur_amount = 0.3000000000029104
+metadata/_custom_type_script = "uid://bkwev2goyta43"

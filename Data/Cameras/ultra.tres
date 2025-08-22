@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CameraSettings" load_steps=2 format=3 uid="uid://bbxsoub34x1yj"]
+
+[ext_resource type="Script" uid="uid://bkwev2goyta43" path="res://Scripts/CameraSettings.gd" id="1_dffyo"]
+
+[resource]
+script = ExtResource("1_dffyo")
+name = "Ultra"
+can_zoom = true
+fov_min = 60.0
+fov_max = 100.0
+has_infinate_focus = true
+focal_depth = 10.0
+focal_point_min = 10.0
+focal_point_max = 100.0
+blur_amount = 0.5
+metadata/_custom_type_script = "uid://bkwev2goyta43"

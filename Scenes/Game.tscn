@@ -23,6 +23,7 @@ _debug_mute_music = false
 
 [node name="Conversation Controller" parent="CanvasLayer" instance=ExtResource("3_e0vue")]
 visible = false
+anchors_preset = -1
 
 [node name="Pause Menu" parent="CanvasLayer" instance=ExtResource("2_j5yw3")]
 

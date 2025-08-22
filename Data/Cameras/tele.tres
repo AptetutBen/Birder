@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CameraSettings" load_steps=2 format=3 uid="uid://dhnng36j6vp00"]
+
+[ext_resource type="Script" uid="uid://bkwev2goyta43" path="res://Scripts/CameraSettings.gd" id="1_mr58g"]
+
+[resource]
+script = ExtResource("1_mr58g")
+name = "Tele"
+fov = 39.0
+depth_range = 4.0
+blur_amount = 0.3000000000029104
+can_change_focus_point = true
+transition = 3.0
+can_zoom = true
+has_auto_focus = true
+metadata/_custom_type_script = "uid://bkwev2goyta43"

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://xfxci40wh8qs"]
+
+[ext_resource type="Script" uid="uid://hkatb5uixrek" path="res://Scripts/Camera/Flashes/BasicFlash.gd" id="1_gcm8v"]
+
+[node name="Flash" type="SpotLight3D"]
+light_color = Color(1, 0.9822071, 0.9639762, 1)
+light_energy = 5.0
+light_indirect_energy = 0.3
+shadow_enabled = true
+shadow_opacity = 0.95
+distance_fade_enabled = true
+distance_fade_begin = 10.0
+distance_fade_shadow = 1000.0
+distance_fade_length = 1000.0
+spot_range = 40.0
+spot_angle = 60.0
+script = ExtResource("1_gcm8v")

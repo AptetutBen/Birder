@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CameraSettings" load_steps=2 format=3 uid="uid://b857aa355x2uq"]
+
+[ext_resource type="Script" uid="uid://bkwev2goyta43" path="res://Scripts/CameraSettings.gd" id="1_pcphu"]
+
+[resource]
+script = ExtResource("1_pcphu")
+name = "Wide"
+fov = 90.0
+depth_range = 6.0
+blur_amount = 0.15000000000873115
+transition = 6.0
+metadata/_custom_type_script = "uid://bkwev2goyta43"
