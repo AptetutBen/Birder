@@ -1,14 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8wg4cuwctt0r"]
+[gd_scene load_steps=5 format=3 uid="uid://c8wg4cuwctt0r"]
 
 [ext_resource type="Script" uid="uid://cp1nwrstgnbkm" path="res://addons/weekendCommandTerminal/Scripts/TerminalPanel.gd" id="1_65041"]
-[ext_resource type="Shader" uid="uid://nyj3fp27uhe5" path="res://addons/weekendCommandTerminal/Shaders/blur.gdshader" id="2_8k2bl"]
 [ext_resource type="FontFile" uid="uid://jbwcecxwdgqu" path="res://Fonts/RobotoMono.ttf" id="2_w15k2"]
 [ext_resource type="Theme" uid="uid://ddngojvg5rlkb" path="res://Themes/CommandWindow.tres" id="3_bkk3c"]
 [ext_resource type="Texture2D" uid="uid://d3t48kyvnql5p" path="res://addons/weekendCommandTerminal/Sprites/Drag Handle.png" id="4_wnaq4"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yjyhu"]
-shader = ExtResource("2_8k2bl")
-shader_parameter/sigma = 8.138
 
 [node name="Command Terminal" type="Control"]
 process_mode = 3
@@ -20,7 +15,6 @@ script = ExtResource("1_65041")
 
 [node name="Main Panel" type="Panel" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_yjyhu")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -94,6 +88,7 @@ theme = ExtResource("3_bkk3c")
 theme_override_fonts/font = ExtResource("2_w15k2")
 theme_override_font_sizes/font_size = 30
 context_menu_enabled = false
+clear_button_enabled = true
 shortcut_keys_enabled = false
 
 [node name="SuggestedText" type="LineEdit" parent="Main Panel/VBoxContainer/Text Entry/HBoxContainer/CommandEdit"]
@@ -112,6 +107,7 @@ mouse_filter = 2
 theme = ExtResource("3_bkk3c")
 theme_override_fonts/font = ExtResource("2_w15k2")
 theme_override_font_sizes/font_size = 30
+clear_button_enabled = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Main Panel/VBoxContainer/Text Entry/HBoxContainer"]
 layout_mode = 2

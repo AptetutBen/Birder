@@ -67,13 +67,26 @@ func add_output(string : String):
 	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
 
 func _on_text_submitted(text : String):
+	accept_event()
 	if text.length() == 0:
 		return
 	command_history_list.append(text)
 	add_output(":"+text)
+	#command_edit.text = ""
+	#suggested_text.text = ""
+	_run_command(text.split(" "))
+	# Give focus back immediately
+	#command_edit.grab_focus()
+	
+	# Defer the clear and refocus until after the current event
+	call_deferred("_reset_command_edit")
+
+
+func _reset_command_edit() -> void:
 	command_edit.text = ""
 	suggested_text.text = ""
-	_run_command(text.split(" "))
+	command_edit.grab_focus()
+
 	
 func _on_text_changed(text : String):
 	if text.length() == 0:
@@ -98,13 +111,25 @@ func _update_suggested_command():
 		return
 	suggested_text.text = possible_commands[suggested_command_index].command
 
+var previous_mouse_mode : int
+var previous_pause_state : bool
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Command_Show"):
 		if visible:
+			Input.mouse_mode = previous_mouse_mode
+			get_tree().paused = previous_pause_state
+			
 			if show_hide_tween == null:
 				hide_with_tween()
 				accept_event()
 		else:
+			previous_mouse_mode = Input.mouse_mode
+			previous_pause_state = get_tree().paused
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_tree().paused = true
+			
+			get_tree().paused = true
 			show_with_tween()
 			command_edit.text=""
 			suggested_text.text = ""
@@ -120,6 +145,7 @@ func show_with_tween() -> void:
 	show()
 	main_panel.position.y = -main_panel.size.y
 	show_hide_tween = get_tree().create_tween()
+	show_hide_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	show_hide_tween.tween_property(main_panel,"position:y",0,0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	show_hide_tween.tween_callback(func(): show_hide_tween = null)
 	
@@ -128,6 +154,7 @@ func hide_with_tween() -> void:
 		show_hide_tween.stop()
 	
 	show_hide_tween = get_tree().create_tween()
+	show_hide_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	show_hide_tween.tween_property(main_panel,"position:y",-main_panel.size.y,0.2).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 	show_hide_tween.tween_callback(func(): hide())
 	show_hide_tween.tween_callback(func(): show_hide_tween = null)

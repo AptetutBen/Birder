@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CameraAttachmentData" load_steps=3 format=3 uid="uid://jlxfiir5ppc3"]
+
+[ext_resource type="PackedScene" uid="uid://xfxci40wh8qs" path="res://Prefabs/Attachments/Flashes/basic_flash.tscn" id="1_mkk8y"]
+[ext_resource type="Script" uid="uid://ca5x5haepr1b3" path="res://Scripts/Resources/CameraAttachmentData.gd" id="2_mkk8y"]
+
+[resource]
+script = ExtResource("2_mkk8y")
+attachment_name = "Basic Flash"
+id = "basic_flash"
+prefab = ExtResource("1_mkk8y")
+type = 3
+metadata/_custom_type_script = "uid://ca5x5haepr1b3"

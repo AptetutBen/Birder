@@ -6,6 +6,8 @@ static var Instance : GameController	#Set Singleton
 @export var _use_debug : bool = false
 @export var _debug_mute_music : bool = true
 
+
+
 func _ready() -> void:
 
 	# Set singleton

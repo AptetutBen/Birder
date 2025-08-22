@@ -11,6 +11,8 @@ var is_currently_loading : bool
 
 var loading_scene : LoadingScreen
 
+var attachment_lookup : Dictionary[String,String]
+
 func _init() -> void:
 	print(" ---- o ---- ")
 	print("Project Name: " + ProjectSettings.get_setting("application/config/name"))
@@ -28,6 +30,8 @@ func _ready():
 	currentScene = root.get_child(root.get_child_count() - 1)
 	
 	dir_contents("res://Scenes")
+	attachment_lookup_builder("res://Data/Attachments/")
+	print(attachment_lookup.size())
 	
 	SaveController._load_settings_data()
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if SaveController.get_is_fullscreen() else DisplayServer.WINDOW_MODE_WINDOWED)
@@ -143,6 +147,22 @@ func _deferred_goto_scene(scene_name, use_loading_screen):
 	
 	is_currently_loading = false
 	
+func get_attachment(id : String) -> CameraAttachmentData:
+	if !attachment_lookup.has(id):
+		printerr("Attachment list doesn't have attachment %s "%[id])
+		return null
+	
+	return load(attachment_lookup[id])
+
+func get_default_camera_attachments() -> Array[CameraAttachmentData]:
+	var items := ["direct_optical_viewfinder"]
+	var return_array : Array[CameraAttachmentData]
+	for item in items:
+		return_array.append(get_attachment(item))
+	return return_array 
+
+func get_attchment_list_ids() -> Array[String]:
+	return attachment_lookup.keys()
 
 func dir_contents(path):
 	var dir = DirAccess.open(path)
@@ -162,3 +182,23 @@ func dir_contents(path):
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
+
+func attachment_lookup_builder(path):
+	var dir = DirAccess.open(path)
+	
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				# Recursively call dir_contents for subdirectories
+				attachment_lookup_builder(path + "/" + file_name)
+			else:
+				if file_name.get_extension().to_lower() == "tres":
+					var full_path : String = path + "/" + file_name
+					var attachment : CameraAttachmentData = load(full_path)
+					attachment_lookup[attachment.id] = full_path
+					
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path for attachments.")

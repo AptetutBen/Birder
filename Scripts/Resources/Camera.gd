@@ -8,15 +8,18 @@ signal lens_changed(Lens)
 signal flash_changed(Flash)
 signal focus_changed(float)
 signal zoom_changed(float)
-signal flash_toggle_changed()
-signal viewfinder_changed(Viewfinder)
+signal flash_toggle_changed(Flash)
+signal viewfinder_changed(ViewFinder)
 signal battery_changed(Battery)
 signal battery_level_changed(float)
+
+static var Instance : GameCamera
 
 @onready var flash_attach_point: Marker3D = %"Flash Attach Point"
 @onready var lens_attach_point: Marker3D = %"Lens Attach Point"
 @onready var viewfinder_attach_point: Marker3D = %"Viewfinder Attach Point"
-@onready var film_attach_point: Marker3D = %"Film AttachPoint"
+@onready var film_attach_point: Marker3D = %"Film Attach Point"
+@onready var battery_attach_point: Marker3D = %"Battery Attach Point"
 
 @onready var camera_3d: Camera3D = %Camera3D
 
@@ -41,56 +44,64 @@ var focus_target: float
 
 var zoom_amount : float
 var zoom_target : float
+var active : bool
 
-var active : bool = false
+#var active : bool = false
 
 @export var zoom_lerp_speed: float = 6.0
 
 @export var auto_focus_on : bool
 @export var flash_on : bool
 
-@export_category("Attachments")
-
-@export var film : Film : 
+var film : Film : 
 	set = _on_change_film
 	
-@export var lens : Lens : 
+var lens : Lens : 
 	set = _on_change_lens
 
-@export var flash : Flash : 
+var flash : Flash : 
 	set = _on_change_flash
 	
-@export var view_finder : ViewFinder : 
+var viewfinder : ViewFinder : 
 	set = _on_change_viewfinder
 
-@export var battery : Battery :
-	set = _onchange_battery
+var battery : Battery :
+	set = _on_change_battery
 
 @export_category("Debug")
+@export var debug_on : bool = false;
 @export var draw_debug : bool = false
 
 func _on_change_film(new_film : Film) -> void:
+	await ready
 	film = new_film
 	film.install(self)
 	film_changed.emit(film)
 
 func _on_change_viewfinder(new_viewfinder : ViewFinder) -> void:
-	await ready
-	view_finder = new_viewfinder
-	view_finder.install(self)
-	viewfinder_changed.emit(view_finder)
+	if !ready:
+		await ready
+	viewfinder = new_viewfinder
+	viewfinder.install(self)
+	viewfinder_changed.emit(viewfinder)
 
 func _on_change_lens(new_lens : Lens) -> void:
+	if !ready:
+		await ready
 	lens = new_lens
 	lens.install(self)
 	lens_changed.emit(lens)
 	
 func _on_change_flash(new_flash: Flash) -> void:
+	if !ready:
+		await ready
 	flash = new_flash
 	flash.install(self)
 	flash_changed.emit(flash)
 
-func _onchange_battery(new_battery : Battery) -> void:
+func _on_change_battery(new_battery : Battery) -> void:
+	if !ready:
+		await ready
 	battery = new_battery
 	battery.install(self)
 	battery_changed.emit(battery)
@@ -100,15 +111,80 @@ func get_viewfinder_offset() -> Vector3:
 		printerr("no viewfinder attached")
 		return Vector3()
 	
-	return view_finder.eye_position.position - view_finder.position
+	return viewfinder.eye_position.position - viewfinder.position
+
+func add_attachment_id(id: String) -> String:
+	var attachment : CameraAttachmentData = FlowController.get_attachment(id)
+	if attachment == null:
+		return "%s is not a valid attachment:"
+	_add_add_attachment(attachment)
+	return "Attachment attached" 
+
+func _add_add_attachment(attachment : CameraAttachmentData) -> void:
+	match attachment.type:
+		CameraAttachmentData.AttachmentType.Lens:
+			if lens !=null:
+				lens.queue_free()
+			var new_lens = attachment.prefab.instantiate()
+			lens_attach_point.add_child(new_lens)
+			lens = new_lens
+			new_lens.data = attachment
+		CameraAttachmentData.AttachmentType.Battery:
+			if battery !=null:
+				battery.queue_free()
+			var new_battery = attachment.prefab.instantiate()
+			battery_attach_point.add_child(new_battery)
+			battery = new_battery
+			new_battery.data = attachment
+		CameraAttachmentData.AttachmentType.Viewfinder:
+			if viewfinder !=null:
+				viewfinder.queue_free()
+			var new_viewfinder = attachment.prefab.instantiate()
+			viewfinder_attach_point.add_child(new_viewfinder)
+			viewfinder = new_viewfinder
+			new_viewfinder.data = attachment
+		CameraAttachmentData.AttachmentType.Flash:
+			if flash !=null:
+				flash.queue_free()
+			var new_flash = attachment.prefab.instantiate()
+			flash_attach_point.add_child(new_flash)
+			flash = new_flash
+			new_flash.data = attachment
+		CameraAttachmentData.AttachmentType.Film:
+			if film !=null:
+				film.queue_free()
+			var new_film = attachment.prefab.instantiate()
+			film_attach_point.add_child(new_film)
+			film = new_film
+			new_film.data = attachment
+
+func get_all_attachment_ids() -> Array[String]:
+	var return_array : Array[String]
+	
+	if viewfinder != null:
+		return_array.append(viewfinder.data.id)
+	if lens != null:
+		return_array.append(lens.data.id)
+	if flash != null:
+		return_array.append(flash.data.id)
+	if battery != null:
+		return_array.append(battery.data.id)
+	if film != null:
+		return_array.append(film.data.id)
+	
+	return return_array
+	
 
 func _ready() -> void:
-	active = false
+	Instance = self
 	
 	if camera_settings == null:
 		printerr("No camera settings set")
 		return
-		
+	
+	for attachment : CameraAttachmentData in FlowController.get_default_camera_attachments():
+		_add_add_attachment(attachment)
+					
 	camera_3d.attributes = attrs
 	set_up_camera()
 	if filmRoll == null:
@@ -138,7 +214,6 @@ func get_main_viewport_texture() -> ViewportTexture:
 func _process(delta: float) -> void:
 	if !active:
 		return
-		
 	if draw_debug:
 		for obj in get_tree().get_nodes_in_group("Important"):
 			draw_obj_debugs(obj as Node3D)
@@ -215,7 +290,7 @@ func capture_camera() -> Image:
 	
 	return img
 
-func draw_obj_debugs(obj : Node3D) -> void:
+func draw_obj_debugs(_obj : Node3D) -> void:
 	pass
 	#var obj_pos = obj.global_transform.origin 
 	#if !camera_3d.is_position_in_frustum(obj_pos):
@@ -229,7 +304,6 @@ func draw_obj_debugs(obj : Node3D) -> void:
 	
 
 func get_object_screen_rect(important_obj) -> Rect2:
-	
 	var aabb: AABB = important_obj.get_aabb()
 	var obj_basis: Basis = important_obj.global_transform.basis
 	var origin: Vector3 = important_obj.global_transform.origin

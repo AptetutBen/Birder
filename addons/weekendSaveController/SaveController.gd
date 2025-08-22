@@ -3,6 +3,7 @@ extends Node
 const saveExtention : String = ".save"
 const gameSaveFileName : String = "game_data"
 const gameSettingFileName : String = "game_setting"
+const CamearAttachmentString : String = "camera_attachments"
 
 var resizeTimer : Timer
 
@@ -20,6 +21,7 @@ func _init():
 	
 func _ready() -> void:
 	get_tree().get_root().size_changed.connect(_set_window_size)
+
 
 func reset_save_data() -> void:
 	variable_dictionary.clear()
@@ -44,7 +46,6 @@ func clear_save_slot(slot_number : int) -> void:
 		variable_dictionary = {}
 
 # Save Data
-
 func get_value(key : String, default : String = "default") -> String:
 	return variable_dictionary.get(key,default)
 
