@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dgagx4mrprcav"]
 
-[ext_resource type="Script" uid="uid://cpd5o7fnsingr" path="res://Scripts/Camera/ViewFinders/DirectOpticalViewfinder.gd" id="1_80vx5"]
+[ext_resource type="Script" uid="uid://cr5ulyqsyvwcl" path="res://Scripts/Camera/ViewFinders/ViewFinder.gd" id="1_np06n"]
 [ext_resource type="Texture2D" uid="uid://ciubhuxj2816q" path="res://Textures/crt.png" id="3_np06n"]
 [ext_resource type="Texture2D" uid="uid://b5ky5l0olf0ju" path="res://Textures/UI.png" id="4_86d0h"]
 
@@ -27,7 +27,7 @@ albedo_color = Color(1, 1, 1, 0.32156864)
 albedo_texture = ExtResource("4_86d0h")
 
 [node name="LCD Viewfinder" type="Node3D" node_paths=PackedStringArray("eye_position")]
-script = ExtResource("1_80vx5")
+script = ExtResource("1_np06n")
 eye_position = NodePath("Eye Position")
 
 [node name="Screen" type="MeshInstance3D" parent="."]

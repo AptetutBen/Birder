@@ -34,3 +34,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15676764, -0.13361478, -0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_r3fl7")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=3 uid="uid://deb5uuidnpnjf"]
+
+[ext_resource type="Script" uid="uid://bsgenxhdgmm7i" path="res://Scripts/Camera/ViewFinders/SLRViewFinder.gd" id="1_irvww"]
+[ext_resource type="Shader" uid="uid://cq8d8gxawdut2" path="res://Shaders/lens_viewfinder.gdshader" id="2_sfcof"]
+[ext_resource type="Texture2D" uid="uid://p564aexge47r" path="res://Textures/7882-normal.jpg" id="3_t1yfb"]
+[ext_resource type="Texture2D" uid="uid://b5ky5l0olf0ju" path="res://Textures/UI.png" id="4_wyvsx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_pqe1c"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_noarx")
+size = Vector2(0.05, 0.033)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jyotk"]
+viewport_path = NodePath("Lens Out")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8x38"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_sfcof")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_jyotk")
+shader_parameter/distortion_map = ExtResource("3_t1yfb")
+shader_parameter/distortion_strength = 0.4270001152825
+shader_parameter/normal_strength = 0.0250000011875
+shader_parameter/chromatic_offset = 0.010000000475
+shader_parameter/vignette_strength = 1.01600004826
+shader_parameter/vignette_blur = 0.4150000197125
+
+[sub_resource type="QuadMesh" id="QuadMesh_aqqpy"]
+resource_local_to_scene = true
+size = Vector2(0.04, 0.027)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uk7ky"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.32156864)
+albedo_texture = ExtResource("4_wyvsx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfq4l"]
+albedo_color = Color(0.35728207, 0.20526177, 0.16725667, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kuaot"]
+size = Vector3(0.07, 0.03, 0.05)
+
+[node name="SLR Viewfinder" type="Node3D" node_paths=PackedStringArray("eye_position")]
+script = ExtResource("1_irvww")
+eye_position = NodePath("Eye Position")
+
+[node name="Eye Position" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.609542e-05, 0.056002676, 0.09953523)
+
+[node name="Lens" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.609542e-05, 0.056002676, 0.0003338307)
+mesh = SubResource("QuadMesh_pqe1c")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_a8x38")
+
+[node name="UI" type="MeshInstance3D" parent="Lens"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0015102029)
+mesh = SubResource("QuadMesh_aqqpy")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uk7ky")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.060397394, -0.025849182)
+material_override = SubResource("StandardMaterial3D_rfq4l")
+mesh = SubResource("BoxMesh_kuaot")

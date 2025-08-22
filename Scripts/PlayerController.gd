@@ -13,11 +13,22 @@ var is_camera_up : bool = false
 @onready var camera_down_marker: Marker3D = %"Camera Down Marker"
 @onready var camera: GameCamera = %Camera
 
+@onready var nav_region: NavigationRegion3D = $"../NavigationRegion3D"
+var nav_ready := false
+@onready var useNav = false
 
 func _ready():
 	# Capture the mouse
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.position = camera_down_marker.position
+	
+	var nav_map = nav_region.get_navigation_map()
+	NavigationServer3D.map_changed.connect(
+		func(changed_map):
+		if changed_map == nav_map:)
+	# Also check if it's already synced
+	if NavigationServer3D.map_get_iteration_id(nav_map) > 0:
+		nav_ready = true
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("ToggleCamera"):
@@ -45,7 +56,13 @@ func _unhandled_input(event):
 			-79, 79
 		)
 
+
+
 func _physics_process(delta):
+
+	if !nav_ready && useNav:
+		return
+
 	var input_dir = Vector3.ZERO
 	if Input.is_action_pressed("Move Up"):
 		input_dir -= transform.basis.z
@@ -55,8 +72,7 @@ func _physics_process(delta):
 		input_dir -= transform.basis.x
 	if Input.is_action_pressed("Move Right"):
 		input_dir += transform.basis.x
-
-	# Normalize so diagonal isn’t faster
+	
 	input_dir = input_dir.normalized()
 
 	# Gravity
@@ -64,11 +80,26 @@ func _physics_process(delta):
 		velocity_y -= gravity * delta
 	else:
 		velocity_y = 0
-		#if Input.is_action_just_pressed("Jump"):
-			#velocity_y = jump_strength
-
-	# Final velocity
-	velocity = input_dir * speed
-	velocity.y = velocity_y
 	
+	if useNav:
+		# --- Project movement onto navmesh ---
+		var nav_map = nav_region.get_navigation_map()
+		var current_pos = global_transform.origin
+		var desired_pos = current_pos + input_dir * speed * delta
+
+		# Snap both to navmesh
+		var nearest_current = NavigationServer3D.map_get_closest_point(nav_map, current_pos)
+		var nearest_desired = NavigationServer3D.map_get_closest_point(nav_map, desired_pos)
+
+		# Direction constrained to navmesh
+		var allowed_move = (nearest_desired - nearest_current).normalized()
+
+		# Apply corrected movement
+		velocity.x = allowed_move.x * speed
+		velocity.z = allowed_move.z * speed
+	else:
+		velocity.x = input_dir.x * speed
+		velocity.z = input_dir.z * speed
+	velocity.y = velocity_y
+
 	move_and_slide()

@@ -1,15 +1,17 @@
 class_name GameCamera extends Node3D
 
-signal film_change(Film)
-signal shot_count_change(int)
-signal shot_total_change(int)
-signal lens_change()
-signal focus_change(float)
-signal zoom_change(float)
-signal flash_toggle_change()
-signal viewfinder_change()
-signal battery_change()
-signal battery_level_change(float)
+signal film_changed(Film)
+signal shot_count_changed(int)
+signal shot_total_changed(int)
+signal take_photo
+signal lens_changed(Lens)
+signal flash_changed(Flash)
+signal focus_changed(float)
+signal zoom_changed(float)
+signal flash_toggle_changed()
+signal viewfinder_changed(Viewfinder)
+signal battery_changed(Battery)
+signal battery_level_changed(float)
 
 @onready var flash_attach_point: Marker3D = %"Flash Attach Point"
 @onready var lens_attach_point: Marker3D = %"Lens Attach Point"
@@ -26,7 +28,6 @@ var current_lens := "standard"
 @onready var attrs := CameraAttributesPractical.new()
 @onready var auto_focus_ray: RayCast3D = %AutoFocusRay
 @onready var viewport: SubViewport = %Viewport
-@onready var shutter_sound: AudioStreamPlayer2D = %ShutterSound
 #@onready var obj_debug: ObjFinder = %ObjFinder
 
 @export var focus_speed: float = 10.0    # how fast to adjust focus target (m/s)
@@ -62,25 +63,37 @@ var active : bool = false
 @export var view_finder : ViewFinder : 
 	set = _on_change_viewfinder
 
+@export var battery : Battery :
+	set = _onchange_battery
+
 @export_category("Debug")
 @export var draw_debug : bool = false
 
 func _on_change_film(new_film : Film) -> void:
 	film = new_film
 	film.install(self)
+	film_changed.emit(film)
 
 func _on_change_viewfinder(new_viewfinder : ViewFinder) -> void:
 	await ready
 	view_finder = new_viewfinder
 	view_finder.install(self)
+	viewfinder_changed.emit(view_finder)
 
 func _on_change_lens(new_lens : Lens) -> void:
 	lens = new_lens
 	lens.install(self)
+	lens_changed.emit(lens)
 	
 func _on_change_flash(new_flash: Flash) -> void:
 	flash = new_flash
 	flash.install(self)
+	flash_changed.emit(flash)
+
+func _onchange_battery(new_battery : Battery) -> void:
+	battery = new_battery
+	battery.install(self)
+	battery_changed.emit(battery)
 
 func get_viewfinder_offset() -> Vector3:
 	if ViewFinder == null:
@@ -139,16 +152,20 @@ func _process(delta: float) -> void:
 				autofocus_to(target_collider)
 		else:
 			if Input.is_action_just_released("FocusIn"):
-				adjust_focus(focus_speed * delta)
+				focus_distance = max(0.1, focus_distance + focus_speed * delta)
+				focus_changed.emit(focus_distance)
 			if Input.is_action_just_released("FocusOut"):
-				adjust_focus(-focus_speed * delta)
+				focus_distance = max(0.1, focus_distance - focus_speed * delta)
+				focus_changed.emit(focus_distance)
 	
 	if camera_settings.can_zoom:
 		if Input.is_action_pressed("ZoomIn"):
 			zoom_target = min(camera_settings.fov_max,zoom_target + camera_settings.zoom_speed * delta)
+			zoom_changed.emit(zoom_target)
 		if Input.is_action_pressed("ZoomOut"):
 			zoom_target = max(camera_settings.fov_min,zoom_target - camera_settings.zoom_speed * delta)
-	
+			zoom_changed.emit(zoom_target)
+			
 	zoom_amount = lerp(zoom_amount, zoom_target, delta * zoom_lerp_speed)
 	camera_3d.fov = zoom_amount
 	
@@ -172,11 +189,6 @@ func _process(delta: float) -> void:
 	#attrs.dof_blur_far_transition = lerp(attrs.dof_blur_far_transition, camera_settings.transition, delta * transition_speed)
 	#attrs.dof_blur_amount = lerp(attrs.dof_blur_amount, camera_settings.blur_amount, delta * transition_speed)
 
-# Use this like turning a focus ring (+ further, - closer)
-func adjust_focus(delta_distance: float) -> void:
-	#focus_target = clamp(focus_target,0.1,)
-	focus_distance = max(0.1, focus_distance + delta_distance)
-
 # Simple one-shot autofocus helper (optional)
 func autofocus_to(target: Node3D) -> void:
 	if target:
@@ -184,11 +196,13 @@ func autofocus_to(target: Node3D) -> void:
 
 func capture_camera() -> Image:
 
-	return
+	take_photo.emit()
+	
 	if flash_on && flash != null:
 		flash.flash()
 		await get_tree().process_frame
-		
+	
+	
 	# Get the texture from the viewport
 	var tex: Texture2D = viewport.get_texture()
 	
@@ -197,8 +211,7 @@ func capture_camera() -> Image:
 	
 	film.add_photo(img)
 	# Optionally, save to disk
-	img.save_png("user://capture.png")
-	shutter_sound.play()
+	# img.save_png("user://capture.png")
 	
 	return img
 

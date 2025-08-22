@@ -45,6 +45,7 @@ eye_position = NodePath("Eye Position")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038509205, 0.029516809, 0.09953523)
 
 [node name="Lens" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038509205, 0.029516809, 0.0003338307)
 mesh = SubResource("QuadMesh_qn5in")
 skeleton = NodePath("../..")

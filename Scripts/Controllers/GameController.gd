@@ -10,7 +10,7 @@ func _ready() -> void:
 
 	# Set singleton
 	Instance = self
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	# Always turn off debug when game is built 
 	if !OS.has_feature("debug"):
@@ -18,4 +18,5 @@ func _ready() -> void:
 	
 	# play the background music,
 	if !_use_debug || !_debug_mute_music:
-		AudioManager.play_music("Game Music")
+		pass
+		#AudioManager.play_music("Game Music")
