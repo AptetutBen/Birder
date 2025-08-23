@@ -19,6 +19,7 @@ static var Instance : GameCamera
 @onready var viewfinder_attach_point: Marker3D = %"Viewfinder Attach Point"
 @onready var storage_attach_point: Marker3D = %"Storage Attach Point"
 @onready var battery_attach_point: Marker3D = %"Battery Attach Point"
+@onready var obj_finder: ObjFinder = %ObjFinder
 
 @onready var camera_3d: Camera3D = %Camera3D
 
@@ -85,21 +86,21 @@ func add_attachment_id(id: String) -> String:
 	_add_attachment(attachment)
 	return "Attachment attached" 
 
-func on_change_lens(lens : Lens) -> void:
+func on_change_lens(new_lens : Lens) -> void:
 	# focus
-	if camera_settings.has_infinite_focus:
+	if new_lens.data.has_infinite_focus:
 		attrs.dof_blur_far_enabled = false
-		attrs.dof_blur_near_distance = camera_settings.focal_point_max - (camera_settings.focal_depth)/2
-		focus_distance = camera_settings.focal_point_min
+		attrs.dof_blur_near_distance = new_lens.data.focal_point_max - (new_lens.data.focal_depth)/2
+		focus_distance = new_lens.data.focal_point_min
 	else:
 		attrs.dof_blur_far_enabled = true
-		focus_distance = camera_settings.focal_point_min - (camera_settings.focal_point_max - camera_settings.focal_point_min)/2
-		attrs.dof_blur_near_distance = focus_distance - camera_settings.focal_depth/2
-		attrs.dof_blur_far_distance = focus_distance + camera_settings.focal_depth/2
+		focus_distance = new_lens.data.focal_point_min - (new_lens.data.focal_point_max - new_lens.data.focal_point_min)/2
+		attrs.dof_blur_near_distance = focus_distance - new_lens.data.focal_depth/2
+		attrs.dof_blur_far_distance = focus_distance + new_lens.data.focal_depth/2
 	focus_target = focus_distance 
 	
 	# fov
-	camera_3d.fov = (camera_settings.fov_min + camera_settings.fov_max)/2 if camera_settings.can_zoom else camera_settings.fov_min
+	camera_3d.fov = (new_lens.data.fov_min + new_lens.data.fov_max)/2 if new_lens.data.can_zoom else new_lens.data.fov_min
 	zoom_amount = camera_3d.fov 
 	zoom_target = zoom_amount
 
@@ -179,8 +180,8 @@ func _process(delta: float) -> void:
 			draw_obj_debugs(obj as Node3D)
 		
 # Move focus target like turning a lens ring
-	if camera_settings.can_change_focus_point:
-		if camera_settings.has_auto_focus && auto_focus_on:
+	if lens.data.can_focus:
+		if lens.data.has_auto_focus && auto_focus_on:
 			var target_collider : Node3D = auto_focus_ray.get_collider()
 			if target_collider != null:
 				autofocus_to(target_collider)
@@ -192,12 +193,12 @@ func _process(delta: float) -> void:
 				focus_distance = max(0.1, focus_distance - focus_speed * delta)
 				focus_changed.emit(focus_distance)
 	
-	if camera_settings.can_zoom:
+	if lens.data.can_zoom:
 		if Input.is_action_pressed("ZoomIn"):
-			zoom_target = min(camera_settings.fov_max,zoom_target + camera_settings.zoom_speed * delta)
+			zoom_target = min(lens.fov_max,zoom_target + lens.zoom_speed * delta)
 			zoom_changed.emit(zoom_target)
 		if Input.is_action_pressed("ZoomOut"):
-			zoom_target = max(camera_settings.fov_min,zoom_target - camera_settings.zoom_speed * delta)
+			zoom_target = max(lens.fov_min,zoom_target - lens.zoom_speed * delta)
 			zoom_changed.emit(zoom_target)
 	
 	if Input.is_action_just_pressed("FlashToggle") && flash != null:
@@ -244,23 +245,21 @@ func capture_photo() -> Image:
 	# Get an image copy
 	var img: Image = tex.get_image()
 	
-	storage.add_photo(img)
-	# Optionally, save to disk
+	filmRoll.add_photo(img)
 	# img.save_png("user://capture.png")
 	
 	return img
 
-func draw_obj_debugs(_obj : Node3D) -> void:
-	pass
-	#var obj_pos = obj.global_transform.origin 
-	#if !camera_3d.is_position_in_frustum(obj_pos):
-		#obj_debug.objects = []
-		#return
-	#var screen_pos : Vector2 = camera_3d.unproject_position(obj_pos)
-	#
-	#obj_debug.objects = [screen_pos]
-	#var obj_rect = get_object_screen_rect(obj)
-	#obj_debug.draw_debug(obj_rect,screen_pos)
+func draw_obj_debugs(obj : Node3D) -> void:
+	var obj_pos = obj.global_transform.origin 
+	if !camera_3d.is_position_in_frustum(obj_pos):
+		obj_finder.objects = []
+		return
+	var screen_pos : Vector2 = camera_3d.unproject_position(obj_pos)
+	
+	obj_finder.objects = [screen_pos]
+	var obj_rect = get_object_screen_rect(obj)
+	obj_finder.draw_debug(obj_rect,screen_pos)
 	
 
 func get_object_screen_rect(important_obj) -> Rect2:

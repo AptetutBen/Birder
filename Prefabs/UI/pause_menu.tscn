@@ -43,7 +43,7 @@ script = ExtResource("1_tm1hf")
 
 [node name="Gradient" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = -1
 anchor_bottom = 1.0
 offset_right = 603.0
 grow_vertical = 2
@@ -52,7 +52,7 @@ metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = -1
 anchor_bottom = 1.0
 offset_right = 338.0
 grow_vertical = 2
@@ -61,7 +61,7 @@ metadata/_edit_lock_ = true
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 36.0
@@ -77,7 +77,7 @@ vertical_alignment = 1
 
 [node name="Button Group" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 55.0
@@ -99,7 +99,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Button Group/Resume Button"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 2.0
 offset_top = 1.0
 offset_right = 198.0
@@ -110,7 +110,7 @@ expand_mode = 1
 [node name="Text" type="RichTextLabel" parent="Button Group/Resume Button"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 126.0
 offset_bottom = 65.0
@@ -131,7 +131,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Button Group/Debug Menu"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 4.0
 offset_top = -9.0
 offset_right = 190.0
@@ -141,7 +141,7 @@ texture = SubResource("AtlasTexture_oadjm")
 [node name="Text" type="RichTextLabel" parent="Button Group/Debug Menu"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 126.0
 offset_bottom = 65.0
@@ -161,7 +161,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Button Group/Quit Button"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 4.0
 offset_top = -3.5
 offset_right = 147.0
@@ -171,7 +171,7 @@ texture = SubResource("AtlasTexture_gad4m")
 [node name="Text" type="RichTextLabel" parent="Button Group/Quit Button"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 126.0
 offset_bottom = 65.0
@@ -184,7 +184,7 @@ autowrap_mode = 0
 
 [node name="Debug Group" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 384.0
@@ -205,7 +205,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Debug Group/Reset Data"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = -2.0
 offset_top = -1.0
 offset_right = 270.0
@@ -216,7 +216,7 @@ expand_mode = 1
 [node name="Text" type="RichTextLabel" parent="Debug Group/Reset Data"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 126.0
 offset_bottom = 65.0
@@ -224,6 +224,38 @@ mouse_filter = 2
 theme = ExtResource("2_b0cm4")
 bbcode_enabled = true
 text = "Reset Data"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Upgrade Camera" type="Control" parent="Debug Group"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+script = ExtResource("6_jy3lh")
+highlight_action = 2
+
+[node name="TextureRect" type="TextureRect" parent="Debug Group/Upgrade Camera"]
+self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
+custom_minimum_size = Vector2(0, 67.7)
+layout_mode = 0
+offset_left = -1.0
+offset_top = 0.5
+offset_right = 432.0
+offset_bottom = 70.5
+texture = SubResource("AtlasTexture_u50t2")
+expand_mode = 1
+flip_h = true
+
+[node name="Text" type="RichTextLabel" parent="Debug Group/Upgrade Camera"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64.9)
+layout_mode = 0
+offset_left = 30.0
+offset_right = 126.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme = ExtResource("2_b0cm4")
+bbcode_enabled = true
+text = "Upgrade Camera"
 scroll_active = false
 autowrap_mode = 0
 
@@ -236,7 +268,7 @@ highlight_action = 2
 [node name="TextureRect" type="TextureRect" parent="Debug Group/Back"]
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
-layout_mode = 2
+layout_mode = 0
 offset_left = 4.0
 offset_top = -7.0
 offset_right = 158.0
@@ -246,7 +278,7 @@ texture = SubResource("AtlasTexture_vvnbd")
 [node name="Text" type="RichTextLabel" parent="Debug Group/Back"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 2
+layout_mode = 0
 offset_left = 30.0
 offset_right = 126.0
 offset_bottom = 65.0
@@ -262,4 +294,5 @@ autowrap_mode = 0
 [connection signal="buttonAction" from="Button Group/Quit Button" to="." method="_on_quit_button_button_action"]
 [connection signal="close_action" from="Debug Group" to="." method="_on_close_debug_menu"]
 [connection signal="buttonAction" from="Debug Group/Reset Data" to="." method="_on_reset_data_button_action"]
+[connection signal="buttonAction" from="Debug Group/Upgrade Camera" to="." method="_on_click_upgrade_camera"]
 [connection signal="buttonAction" from="Debug Group/Back" to="Debug Group" method="_on_close"]

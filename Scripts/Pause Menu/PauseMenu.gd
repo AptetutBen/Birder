@@ -7,7 +7,6 @@ extends Control
 
 var previous_mouse_mode
 
-
 func _ready() -> void:
 	visible = false
 	await get_tree().process_frame
@@ -61,3 +60,8 @@ func _on_close_debug_menu() -> void:
 func _on_reset_data_button_action() -> void:
 	SaveController.reset_save_data()
 	_unpause()
+	
+func _on_click_upgrade_camera() -> void:
+	GameCamera.Instance.add_attachment_id("50mm_lens")
+	GameCamera.Instance.add_attachment_id("lcd_viewfinder")
+	GameCamera.Instance.add_attachment_id("basic_flash")

@@ -6,6 +6,9 @@ var power_use : float
 
 var flash_on : bool
 
+func _ready() -> void:
+	light.visible = false
+
 func flash() -> void:
 	if camera.battery == null:
 		return
