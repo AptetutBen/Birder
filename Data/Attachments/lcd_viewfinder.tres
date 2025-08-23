@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="CameraAttachmentData" load_steps=3 format=3 uid="uid://cebdrqlm7q53b"]
+[gd_resource type="Resource" script_class="ViewfinderData" load_steps=3 format=3 uid="uid://cebdrqlm7q53b"]
 
 [ext_resource type="PackedScene" uid="uid://dgagx4mrprcav" path="res://Prefabs/Attachments/Viewfinders/basic_lcd_viewfinder.tscn" id="1_bp6go"]
-[ext_resource type="Script" uid="uid://ca5x5haepr1b3" path="res://Scripts/Resources/CameraAttachmentData.gd" id="2_bp6go"]
+[ext_resource type="Script" uid="uid://cnvdwdtf75jsl" path="res://Scripts/Resources/ViewfinderData.gd" id="2_bp6go"]
 
 [resource]
 script = ExtResource("2_bp6go")
 attachment_name = "LCD Viewfinder"
 id = "lcd_viewfinder"
 prefab = ExtResource("1_bp6go")
-type = 2
 metadata/_custom_type_script = "uid://ca5x5haepr1b3"

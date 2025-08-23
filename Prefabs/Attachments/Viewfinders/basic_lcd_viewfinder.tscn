@@ -33,11 +33,13 @@ eye_position = NodePath("Eye Position")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003715165, 0, 0.00030852482)
 material_override = SubResource("StandardMaterial3D_eem0s")
+cast_shadow = 0
 mesh = SubResource("QuadMesh_a0tk4")
 skeleton = NodePath("../..")
 
 [node name="UI" type="MeshInstance3D" parent="Screen"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0048046745)
+cast_shadow = 0
 mesh = SubResource("QuadMesh_rfq4l")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_uk7ky")

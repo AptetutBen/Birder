@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="CameraAttachmentData" load_steps=3 format=3 uid="uid://dmamvevd6bjg8"]
+[gd_resource type="Resource" script_class="ViewfinderData" load_steps=3 format=3 uid="uid://dmamvevd6bjg8"]
 
 [ext_resource type="PackedScene" uid="uid://c3b22dvufgivt" path="res://Prefabs/Attachments/Viewfinders/direct_optical_viewfinder.tscn" id="1_serq1"]
-[ext_resource type="Script" uid="uid://ca5x5haepr1b3" path="res://Scripts/Resources/CameraAttachmentData.gd" id="2_serq1"]
+[ext_resource type="Script" uid="uid://cnvdwdtf75jsl" path="res://Scripts/Resources/ViewfinderData.gd" id="2_serq1"]
 
 [resource]
 script = ExtResource("2_serq1")
 attachment_name = "Optical Viewfinder"
 id = "direct_optical_viewfinder"
 prefab = ExtResource("1_serq1")
-type = 2
 metadata/_custom_type_script = "uid://ca5x5haepr1b3"

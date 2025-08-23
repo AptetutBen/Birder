@@ -42,17 +42,19 @@ script = ExtResource("1_qn5in")
 eye_position = NodePath("Eye Position")
 
 [node name="Eye Position" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038509205, 0.029516809, 0.09953523)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038509205, 0.029516809, 0.074324675)
 
 [node name="Lens" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038509205, 0.029516809, 0.0003338307)
+cast_shadow = 0
 mesh = SubResource("QuadMesh_qn5in")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_ybemm")
 
 [node name="UI" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038509205, 0.029516809, 0.0018440336)
+cast_shadow = 0
 mesh = SubResource("QuadMesh_ca0ak")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_uk7ky")

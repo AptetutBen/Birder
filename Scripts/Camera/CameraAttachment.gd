@@ -1,7 +1,6 @@
 class_name CameraAttachment extends Node3D
 
-@export var data : CameraAttachmentData
 var camera : GameCamera
-
-func install(body_camera : GameCamera) -> void:
+	
+func install(body_camera : GameCamera, _data : CameraAttachmentData) -> void:
 	camera = body_camera

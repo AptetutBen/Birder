@@ -1,16 +1,16 @@
 class_name Film extends CameraAttachment
 
+var data : FilmData
 @export var film_roll : FilmRoll
-@export var size : int = 5
 
-func install(body_camera : GameCamera) -> void:
-	super(body_camera)
+func install(body_camera : GameCamera, att_data : CameraAttachmentData) -> void:
+	super(body_camera,att_data)
+	data = att_data
 	camera.film_change.emit(self)
 	update_connected_attachments()
-
+	
 func update_connected_attachments() -> void:
 	camera.shot_count_change.emit(0 if film_roll == null else film_roll.get_photos_used_count())
-	camera.shot_total_change.emit(0 if film_roll == null else size)
 	
 func insert_new_film(new_film_roll : FilmRoll) -> void:
 	film_roll = new_film_roll
