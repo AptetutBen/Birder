@@ -31,7 +31,6 @@ func _ready():
 	
 	dir_contents("res://Scenes")
 	attachment_lookup_builder("res://Data/Attachments/")
-	print(attachment_lookup.size())
 	
 	SaveController._load_settings_data()
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if SaveController.get_is_fullscreen() else DisplayServer.WINDOW_MODE_WINDOWED)
@@ -155,13 +154,13 @@ func get_attachment(id : String) -> CameraAttachmentData:
 	return load(attachment_lookup[id])
 
 func get_default_camera_attachments() -> Array[CameraAttachmentData]:
-	var items := ["direct_optical_viewfinder"]
+	var items := ["direct_optical_viewfinder","basic_lens"]
 	var return_array : Array[CameraAttachmentData]
 	for item in items:
 		return_array.append(get_attachment(item))
 	return return_array 
 
-func get_attchment_list_ids() -> Array[String]:
+func get_attachment_list_ids() -> Array[String]:
 	return attachment_lookup.keys()
 
 func dir_contents(path):

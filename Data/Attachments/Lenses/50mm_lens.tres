@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="LensData" load_steps=3 format=3 uid="uid://dvioemhvis4ex"]
+
+[ext_resource type="PackedScene" uid="uid://c7n7m3fdsp1vl" path="res://Prefabs/Attachments/Lenses/basic_lens.tscn" id="1_p03l5"]
+[ext_resource type="Script" uid="uid://d0bif0avomtu2" path="res://Scripts/Resources/LensData.gd" id="2_lxc3c"]
+
+[resource]
+script = ExtResource("2_lxc3c")
+can_zoom = false
+fov_min = 60.0
+fov_max = 100.0
+zoom_speed = 10.0
+can_focus = true
+has_infinite_focus = false
+focal_depth = 10.0
+focal_point_min = 5.0
+focal_point_max = 20.0
+focus_speed = 10.0
+has_auto_focus = false
+blur_amount = 0.4
+lens_transition = 0.0
+attachment_name = "Basic Lens"
+id = "basic_lens"
+prefab = ExtResource("1_p03l5")
+metadata/_custom_type_script = "uid://d0bif0avomtu2"

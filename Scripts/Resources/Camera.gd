@@ -1,6 +1,6 @@
 class_name GameCamera extends Node3D
 
-signal film_changed(Film)
+signal storage_changed(Storeage)
 signal lens_changed(Lens)
 signal flash_changed(Flash)
 signal viewfinder_changed(ViewFinder)
@@ -17,12 +17,10 @@ static var Instance : GameCamera
 @onready var flash_attach_point: Marker3D = %"Flash Attach Point"
 @onready var lens_attach_point: Marker3D = %"Lens Attach Point"
 @onready var viewfinder_attach_point: Marker3D = %"Viewfinder Attach Point"
-@onready var film_attach_point: Marker3D = %"Film Attach Point"
+@onready var storage_attach_point: Marker3D = %"Storage Attach Point"
 @onready var battery_attach_point: Marker3D = %"Battery Attach Point"
 
 @onready var camera_3d: Camera3D = %Camera3D
-
-@export var camera_settings : CameraSettings
 
 var current_lens := "standard"
 @export var transition_speed: float = 6.0
@@ -30,7 +28,6 @@ var current_lens := "standard"
 @onready var attrs := CameraAttributesPractical.new()
 @onready var auto_focus_ray: RayCast3D = %AutoFocusRay
 @onready var viewport: SubViewport = %Viewport
-#@onready var obj_debug: ObjFinder = %ObjFinder
 
 @export var focus_speed: float = 10.0    # how fast to adjust focus target (m/s)
 @export var focus_lerp_speed: float = 6.0 # how fast actual focus catches up
@@ -52,7 +49,7 @@ var active : bool
 @export var auto_focus_on : bool
 @export var flash_on : bool
 
-var film : Film
+var storage : Storage
 var lens : Lens
 var flash : Flash
 var viewfinder : ViewFinder
@@ -65,15 +62,12 @@ var battery : Battery
 func _ready() -> void:
 	Instance = self
 	
-	if camera_settings == null:
-		printerr("No camera settings set")
-		return
-	
+	lens_changed.connect(on_change_lens)
+
 	for attachment : CameraAttachmentData in FlowController.get_default_camera_attachments():
 		_add_attachment(attachment)
 					
 	camera_3d.attributes = attrs
-	set_up_camera()
 	if filmRoll == null:
 		filmRoll = FilmRoll.new()
 
@@ -90,6 +84,24 @@ func add_attachment_id(id: String) -> String:
 		return "%s is not a valid attachment:"
 	_add_attachment(attachment)
 	return "Attachment attached" 
+
+func on_change_lens(lens : Lens) -> void:
+	# focus
+	if camera_settings.has_infinite_focus:
+		attrs.dof_blur_far_enabled = false
+		attrs.dof_blur_near_distance = camera_settings.focal_point_max - (camera_settings.focal_depth)/2
+		focus_distance = camera_settings.focal_point_min
+	else:
+		attrs.dof_blur_far_enabled = true
+		focus_distance = camera_settings.focal_point_min - (camera_settings.focal_point_max - camera_settings.focal_point_min)/2
+		attrs.dof_blur_near_distance = focus_distance - camera_settings.focal_depth/2
+		attrs.dof_blur_far_distance = focus_distance + camera_settings.focal_depth/2
+	focus_target = focus_distance 
+	
+	# fov
+	camera_3d.fov = (camera_settings.fov_min + camera_settings.fov_max)/2 if camera_settings.can_zoom else camera_settings.fov_min
+	zoom_amount = camera_3d.fov 
+	zoom_target = zoom_amount
 
 func _add_attachment(attachment : CameraAttachmentData) -> void:
 	if !ready:
@@ -131,14 +143,14 @@ func _add_attachment(attachment : CameraAttachmentData) -> void:
 			flash.install(self,attachment)
 			flash_changed.emit(flash)
 			
-		CameraAttachmentData.AttachmentType.Film:
-			if film !=null:
-				film.queue_free()
-			var new_film = attachment.prefab.instantiate()
-			film_attach_point.add_child(new_film)
-			film = new_film
-			film.install(self,attachment)
-			film_changed.emit(film)
+		CameraAttachmentData.AttachmentType.Storage:
+			if storage !=null:
+				storage.queue_free()
+			var new_storage = attachment.prefab.instantiate()
+			storage_attach_point.add_child(new_storage)
+			storage = new_storage
+			storage.install(self,attachment)
+			storage_changed.emit(storage)
 			
 
 func get_all_attachment_ids() -> Array[String]:
@@ -152,27 +164,9 @@ func get_all_attachment_ids() -> Array[String]:
 		return_array.append(flash.data.id)
 	if battery != null:
 		return_array.append(battery.data.id)
-	if film != null:
-		return_array.append(film.data.id)
+	if storage != null:
+		return_array.append(storage.data.id)
 	return return_array
-	
-func set_up_camera() -> void:
-	# focus
-	if camera_settings.has_infinate_focus:
-		attrs.dof_blur_far_enabled = false
-		attrs.dof_blur_near_distance = camera_settings.focal_point_max - (camera_settings.focal_depth)/2
-		focus_distance = camera_settings.focal_point_min
-	else:
-		attrs.dof_blur_far_enabled = true
-		focus_distance = camera_settings.focal_point_min - (camera_settings.focal_point_max - camera_settings.focal_point_min)/2
-		attrs.dof_blur_near_distance = focus_distance - camera_settings.focal_depth/2
-		attrs.dof_blur_far_distance = focus_distance + camera_settings.focal_depth/2
-	focus_target = focus_distance 
-	
-	# fov
-	camera_3d.fov = (camera_settings.fov_min + camera_settings.fov_max)/2 if camera_settings.can_zoom else camera_settings.fov_min
-	zoom_amount = camera_3d.fov 
-	zoom_target = zoom_amount
 
 func get_main_viewport_texture() -> ViewportTexture:
 	return viewport.get_texture()
@@ -250,7 +244,7 @@ func capture_photo() -> Image:
 	# Get an image copy
 	var img: Image = tex.get_image()
 	
-	film.add_photo(img)
+	storage.add_photo(img)
 	# Optionally, save to disk
 	# img.save_png("user://capture.png")
 	

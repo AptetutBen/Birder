@@ -1,4 +1,4 @@
-class_name FilmData extends CameraAttachmentData
+class_name StorageData extends CameraAttachmentData
 
 func get_type() -> AttachmentType:
-	return AttachmentType.Film
+	return AttachmentType.Storage

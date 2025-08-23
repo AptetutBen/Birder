@@ -12,7 +12,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Curve" id="Curve_eapw0"]
-_data = [Vector2(0, 0), 0.0, 10.0, 0, 1, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8), -0.22222221, 0.0, 1, 0]
+_data = [Vector2(0, 0), 0.0, 10.0, 0, 1, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8), -0.222222, 0.0, 1, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_pcewo"]
@@ -22,22 +22,22 @@ curve = SubResource("Curve_eapw0")
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4c2cr"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lkl1w"]
-noise = SubResource("FastNoiseLite_4c2cr")
 seamless = true
+noise = SubResource("FastNoiseLite_4c2cr")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rs0k1"]
 fractal_octaves = 10
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_or465"]
-noise = SubResource("FastNoiseLite_rs0k1")
 seamless = true
+noise = SubResource("FastNoiseLite_rs0k1")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nsbgi"]
 noise_type = 3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_27faw"]
-noise = SubResource("FastNoiseLite_nsbgi")
 seamless = true
+noise = SubResource("FastNoiseLite_nsbgi")
 
 [resource]
 shader = ExtResource("1_i5n5i")
@@ -46,15 +46,15 @@ shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_lkl1w")
 shader_parameter/cloud_curves = SubResource("CurveTexture_pcewo")
 shader_parameter/clouds_samples = 16
 shader_parameter/shadow_sample = 4
-shader_parameter/clouds_density = 0.40000000596048
-shader_parameter/clouds_scale = 1.0000000074506
-shader_parameter/clouds_smoothness = 0.03999999910592
-shader_parameter/clouds_light_color = Color(0.84063303, 0.9999998, 0.9995026, 1)
+shader_parameter/clouds_density = 0.4
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_smoothness = 0.04
+shader_parameter/clouds_light_color = Color(0.840633, 1, 0.999503, 1)
 shader_parameter/clouds_shadow_intensity = 3.5
 shader_parameter/high_clouds_sampler = SubResource("NoiseTexture2D_27faw")
-shader_parameter/high_clouds_density = 0.20000000298024
-shader_parameter/top_color = Color(0.3425644, 0.58406717, 0.99999946, 1)
-shader_parameter/bottom_color = Color(0.00011108577, 0.259193, 0.7814337, 1)
+shader_parameter/high_clouds_density = 0.2
+shader_parameter/top_color = Color(0.342564, 0.584067, 0.999999, 1)
+shader_parameter/bottom_color = Color(0.000111086, 0.259193, 0.781434, 1)
 shader_parameter/sun_scatter = Color(0.298039, 0.298039, 0.298039, 1)
 shader_parameter/astro_tint = Color(0.905882, 0.788235, 0.627451, 1)
 shader_parameter/astro_sampler = SubResource("GradientTexture2D_xucge")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dw1a7mhovoxaa"]
+[gd_scene load_steps=9 format=3 uid="uid://dw1a7mhovoxaa"]
 
 [ext_resource type="Script" uid="uid://bbrmgy2hmh6dl" path="res://Scripts/Resources/Camera.gd" id="1_q05pk"]
 [ext_resource type="AudioStream" uid="uid://b8jx6lclt34k1" path="res://Audio/SFX/Shutter.mp3" id="5_lp8pq"]
@@ -9,12 +9,7 @@
 size = Vector3(0.14, 0.11, 0.07)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfq4l"]
-albedo_color = Color(0.35728207, 0.20526177, 0.16725667, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_a202f"]
-top_radius = 0.03
-bottom_radius = 0.03
-height = 0.02
+albedo_color = Color(0.357282, 0.205262, 0.167257, 1)
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_noarx"]
 dof_blur_far_enabled = true
@@ -22,9 +17,9 @@ dof_blur_near_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0b32j"]
 shader = ExtResource("7_uk7ky")
-shader_parameter/flash_strength = 0.9110000432725
+shader_parameter/flash_strength = 0.911
 shader_parameter/green_shift = 0.05
-shader_parameter/bloom_strength = 0.7650000363375
+shader_parameter/bloom_strength = 0.765
 
 [node name="Camera" type="Node3D"]
 script = ExtResource("1_q05pk")
@@ -35,22 +30,23 @@ draw_debug = true
 
 [node name="AutoFocusRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03213334)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0321333)
 target_position = Vector3(0, 0, -30)
 hit_back_faces = false
 
 [node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000137687, 7.45058e-09, 0.000210792)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_kbofq")
 surface_material_override/0 = SubResource("StandardMaterial3D_rfq4l")
 
 [node name="Flash Attach Point" type="Marker3D" parent="Body"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058934182, 0.045753665, -0.03584531)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0589342, 0.0457537, -0.0358453)
 
 [node name="Lens Attach Point" type="Marker3D" parent="Body"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03685163)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0368516)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Body/Lens Attach Point"]
 remote_path = NodePath("../../../CameraLens/Viewport/Camera3D")
@@ -58,24 +54,19 @@ update_scale = false
 
 [node name="Viewfinder Attach Point" type="Marker3D" parent="Body"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.035529792)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0355298)
 
-[node name="Film Attach Point" type="Marker3D" parent="Body"]
+[node name="Storage Attach Point" type="Marker3D" parent="Body"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06974363, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0697436, 0, 0)
 
 [node name="Battery Attach Point" type="Marker3D" parent="Body"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06974363, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0697436, 0, 0)
 
 [node name="ShutterSound" type="AudioStreamPlayer2D" parent="Body"]
 unique_name_in_owner = true
 stream = ExtResource("5_lp8pq")
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.03685163)
-layers = 2
-mesh = SubResource("CylinderMesh_a202f")
 
 [node name="CameraLens" type="Node3D" parent="."]
 
@@ -85,9 +76,9 @@ size = Vector2i(1024, 769)
 
 [node name="Camera3D" type="Camera3D" parent="CameraLens/Viewport"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03685163)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000137687, 7.45058e-09, -0.0366408)
 attributes = SubResource("CameraAttributesPractical_noarx")
-fov = 60.071587
+fov = 60.0716
 
 [node name="Lens" type="CanvasLayer" parent="CameraLens/Viewport"]
 visible = false

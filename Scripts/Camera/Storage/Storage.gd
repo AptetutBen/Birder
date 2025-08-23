@@ -1,6 +1,6 @@
-class_name Film extends CameraAttachment
+class_name Storage extends CameraAttachment
 
-var data : FilmData
+var data : StorageData
 @export var film_roll : FilmRoll
 
 func install(body_camera : GameCamera, att_data : CameraAttachmentData) -> void:

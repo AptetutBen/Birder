@@ -19,7 +19,7 @@ func run_command(strings : PackedStringArray, _panel) -> String:
 		if strings[1].to_lower() == "list":
 			return "list of loaded attachments: \n	> " + ("\n	>".join(FlowController.get_attchment_list_ids()))
 		else:
-			if FlowController.get_attchment_list_ids().has(strings[1]):
+			if FlowController.get_attachment_list_ids().has(strings[1]):
 				GameCamera.Instance.add_attachment_id(strings[1])
 				return "Added Attachments"
 			else:

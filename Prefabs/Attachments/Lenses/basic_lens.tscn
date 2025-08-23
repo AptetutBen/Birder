@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7n7m3fdsp1vl"]
+
+[ext_resource type="Script" uid="uid://buxxhjnhc8y5c" path="res://Scripts/Camera/Lenses/Lens.gd" id="1_0vmy3"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7d87i"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.003
+radial_segments = 24
+
+[node name="Basic Lens" type="Node3D"]
+script = ExtResource("1_0vmy3")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.000876479)
+layers = 2
+mesh = SubResource("CylinderMesh_7d87i")

@@ -8,7 +8,7 @@ func install(body_camera : GameCamera, att_data : CameraAttachmentData) -> void:
 	data = att_data
 	
 	camera.take_photo.connect(_on_take_photo)
-	camera.film_changed.connect(_on_film_change)
+	camera.storage_changed.connect(_on_film_change)
 	camera.shot_count_changed.connect(_on_shot_count_change)
 	camera.lens_changed.connect(_on_lens_change)
 	camera.focus_changed.connect(_on_focus_change)
@@ -21,7 +21,7 @@ func install(body_camera : GameCamera, att_data : CameraAttachmentData) -> void:
 func _on_take_photo() -> void:
 	pass
 
-func _on_film_change(_film : Film) -> void:
+func _on_film_change(_film : Storage) -> void:
 	pass
 
 func _on_shot_count_change(_count : int) -> void:
@@ -30,7 +30,7 @@ func _on_shot_count_change(_count : int) -> void:
 func _on_shot_total_change(_total : int) -> void:
 	pass
 
-func _on_lens_change() -> void:
+func _on_lens_change(_lens : Lens) -> void:
 	pass
 
 func _on_focus_change(_value : float) -> void:
