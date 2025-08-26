@@ -65,3 +65,5 @@ func _on_click_upgrade_camera() -> void:
 	GameCamera.Instance.add_attachment_id("50mm_lens")
 	GameCamera.Instance.add_attachment_id("lcd_viewfinder")
 	GameCamera.Instance.add_attachment_id("basic_flash")
+	GameCamera.Instance.add_attachment_id("big_battery")
+	_unpause()

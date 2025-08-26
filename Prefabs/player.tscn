@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbhn7up6v4r68"]
+[gd_scene load_steps=5 format=3 uid="uid://dbhn7up6v4r68"]
 
 [ext_resource type="Script" uid="uid://bnvx2bmukpm4c" path="res://Scripts/PlayerController.gd" id="1_y5hcb"]
 [ext_resource type="PackedScene" uid="uid://dw1a7mhovoxaa" path="res://Prefabs/camera.tscn" id="2_2nftw"]
-[ext_resource type="Resource" uid="uid://bbxsoub34x1yj" path="res://Data/Cameras/ultra.tres" id="3_knrd4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3fl7"]
 
@@ -18,13 +17,12 @@ shape = SubResource("CapsuleShape3D_r3fl7")
 [node name="PlayerCamera" type="Camera3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6067318, -0.10147953)
+cull_mask = 1048569
 near = 0.005
 
 [node name="Camera" parent="PlayerCamera" instance=ExtResource("2_2nftw")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5047715, -0.42912734)
-camera_settings = ExtResource("3_knrd4")
-draw_debug = false
 
 [node name="Camera Down Marker" type="Marker3D" parent="PlayerCamera"]
 unique_name_in_owner = true

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BatteryData" load_steps=3 format=3 uid="uid://c2ddmt5rq40kk"]
+
+[ext_resource type="PackedScene" uid="uid://ux28ispnekyt" path="res://Prefabs/Attachments/Batterys/big_battery.tscn" id="1_28opg"]
+[ext_resource type="Script" uid="uid://c5ktr336wacar" path="res://Scripts/Resources/BatteryData.gd" id="1_fasao"]
+
+[resource]
+script = ExtResource("1_fasao")
+attachment_name = "Big Battery"
+id = "big_battery"
+prefab = ExtResource("1_28opg")
+metadata/_custom_type_script = "uid://c5ktr336wacar"

@@ -1,12 +1,15 @@
 class_name ObjFinder extends Control
 
+static var Instance : ObjFinder
+
 var rects: Array[Rect2]
 var objects: Array[Vector2]
 
+func _ready() -> void:
+	Instance = self
+
 func _process(_delta):
-
 	queue_redraw()
-
 
 func _draw():
 	for obj in objects:
@@ -19,7 +22,6 @@ func _draw():
 	
 	rects.clear()
 	objects.clear()
-
 
 func draw_debug(rect: Rect2, pos : Vector2) -> void:
 	rects.append(rect)

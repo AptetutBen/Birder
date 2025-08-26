@@ -19,24 +19,19 @@ script = ExtResource("4_8mehq")
 text = "
 "
 options = Array[ExtResource("3_fm80j")]([SubResource("Resource_tlxkr")])
-character_id = 0
 id = 2
 position = Vector2(20, -220)
 size = Vector2(394, 288)
 
 [sub_resource type="Resource" id="Resource_3huct"]
 script = ExtResource("5_t0jf0")
-connected_node_id = -1
-save_type = 0
 saved_key = "test"
-saved_value = ""
 id = 3
 position = Vector2(460, -180)
 size = Vector2(282, 252)
 
 [sub_resource type="Resource" id="Resource_88yx7"]
 script = ExtResource("7_4yv5g")
-key = ""
 default_connected_node = 2
 connections = {
 "": 5
@@ -49,23 +44,16 @@ size = Vector2(361, 244)
 script = ExtResource("2_oucrf")
 first_node_id = 4
 start_key = "default"
-id = 0
 position = Vector2(-1260, -100)
-size = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_bgd7q"]
 script = ExtResource("2_oucrf")
 first_node_id = 2
 start_key = "second"
-id = 0
 position = Vector2(-1260, -460)
-size = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_f5b0n"]
 script = ExtResource("4_8mehq")
-text = ""
-options = Array[ExtResource("3_fm80j")]([])
-character_id = 0
 id = 5
 position = Vector2(20, 100)
 size = Vector2(394, 288)

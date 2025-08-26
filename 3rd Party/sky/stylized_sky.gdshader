@@ -10,7 +10,8 @@ uniform sampler2D cloud_curves;
 uniform int clouds_samples : hint_range(8, 32, 8) = 16;
 uniform int shadow_sample : hint_range(1, 4, 1) = 4;
 
-uniform float clouds_density : hint_range(0.0, 1.0, 0.1) = 0.5;
+uniform float cloud_speed : hint_range(-0.01, 0.01, 0.001);
+uniform float clouds_density : hint_range(0.0, 1.0, 0.01) = 0.5;
 uniform float clouds_scale : hint_range(0.5, 1.5, 0.1) = 1.0;
 uniform float clouds_smoothness : hint_range(0.01, 0.1, 0.01) = 0.035;
 uniform vec3 clouds_light_color : source_color;
@@ -40,7 +41,7 @@ uniform float stars_intensity : hint_range(0.0, 5.0, 0.1) = 0.0;
 
 group_uniforms shooting_stars;
 
-uniform float shooting_stars_intensity : hint_range(0.0, 10.0, 0.1) = 0.0;
+uniform float shooting_stars_intensity : hint_range(0.0, 10.0, 0.01) = 0.0;
 uniform sampler2D shooting_star_sampler : filter_linear, repeat_disable;
 uniform vec3 shooting_star_tint : source_color;
 
@@ -91,7 +92,7 @@ mat3 direction_to_matrix(vec3 direction) {
 }
 
 float cloud_density(vec3 p, float progress){
-	float t_o = TIME * 0.001;
+	float t_o = TIME * cloud_speed;
 	float t_o_small = TIME * -0.005;
 	float noise = texture(cloud_noise_sampler, p.xy * 4.0 + t_o_small).x * 0.1 + 0.9;
 	float clouds_shape = texture(cloud_shape_sampler, (p.xy + t_o) * clouds_scale).x;

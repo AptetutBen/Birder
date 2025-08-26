@@ -46,6 +46,7 @@ shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_lkl1w")
 shader_parameter/cloud_curves = SubResource("CurveTexture_pcewo")
 shader_parameter/clouds_samples = 16
 shader_parameter/shadow_sample = 4
+shader_parameter/cloud_speed = 0.0
 shader_parameter/clouds_density = 0.4
 shader_parameter/clouds_scale = 1.0
 shader_parameter/clouds_smoothness = 0.04

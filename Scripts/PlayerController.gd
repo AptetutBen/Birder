@@ -22,13 +22,13 @@ func _ready():
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.position = camera_down_marker.position
 	
-	var nav_map = nav_region.get_navigation_map()
-	NavigationServer3D.map_changed.connect(
-		func(changed_map):
-		if changed_map == nav_map:)
-	# Also check if it's already synced
-	if NavigationServer3D.map_get_iteration_id(nav_map) > 0:
-		nav_ready = true
+	#var nav_map = nav_region.get_navigation_map()
+	#NavigationServer3D.map_changed.connect(
+		#func(changed_map):
+		#if changed_map == nav_map:)
+	## Also check if it's already synced
+	#if NavigationServer3D.map_get_iteration_id(nav_map) > 0:
+		#nav_ready = true
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("ToggleCamera"):
@@ -37,9 +37,11 @@ func _process(_delta: float) -> void:
 		if is_camera_up:
 			camera_move_tween = create_tween()
 			camera_move_tween.tween_property(camera,"position",camera_down_marker.position,0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+			camera_move_tween.tween_callback(camera.disable_viewport)
 			camera.active = false
 			is_camera_up = false
 		else:
+			camera.enable_viewport()
 			camera_move_tween = create_tween()
 			camera_move_tween.tween_property(camera,"position", -camera.get_viewfinder_offset(),0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			
@@ -55,7 +57,6 @@ func _unhandled_input(event):
 			player_camera.rotation_degrees.x - event.relative.y * mouse_sensitivity,
 			-79, 79
 		)
-
 
 
 func _physics_process(delta):

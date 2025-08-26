@@ -1,4 +1,4 @@
-class_name ImportantObject extends Node3D
+class_name Bird extends Node3D
 
 @export var important_mesh : MeshInstance3D
 

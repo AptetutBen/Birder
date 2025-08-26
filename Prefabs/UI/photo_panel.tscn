@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp3wco123enmp"]
+
+[ext_resource type="Script" uid="uid://buech7ycsgxjh" path="res://Scripts/Camera/ViewFinders/PhotoPanel.gd" id="1_o62yv"]
+[ext_resource type="PackedScene" uid="uid://clmuyae8ol2ht" path="res://Prefabs/UI/photo_ui.tscn" id="2_g0r7k"]
+
+[node name="Photo Panel" type="Panel"]
+process_mode = 3
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_o62yv")
+photo_prefab = ExtResource("2_g0r7k")
+
+[node name="PhotoParent" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Photo UI" parent="PhotoParent" instance=ExtResource("2_g0r7k")]
+layout_mode = 2
+
+[node name="Photo UI2" parent="PhotoParent" instance=ExtResource("2_g0r7k")]
+layout_mode = 2
+
+[node name="Photo UI3" parent="PhotoParent" instance=ExtResource("2_g0r7k")]
+layout_mode = 2
+
+[node name="Photo UI4" parent="PhotoParent" instance=ExtResource("2_g0r7k")]
+layout_mode = 2

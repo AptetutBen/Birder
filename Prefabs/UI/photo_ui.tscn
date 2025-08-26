@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://clmuyae8ol2ht"]
+
+[ext_resource type="Script" uid="uid://bugfqcm54546t" path="res://Scripts/UI/PhotoUI.gd" id="1_kfm7v"]
+
+[node name="Photo UI" type="ColorRect"]
+custom_minimum_size = Vector2(100, 66)
+script = ExtResource("1_kfm7v")
+
+[node name="Texture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 4

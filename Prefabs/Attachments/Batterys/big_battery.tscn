@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ux28ispnekyt"]
+
+[ext_resource type="Script" uid="uid://domtw7hchb7s1" path="res://Scripts/Camera/Batterys/Battery.gd" id="1_7m2lj"]
+
+[node name="BigBattery" type="Node3D"]
+script = ExtResource("1_7m2lj")
+power = 1000.0

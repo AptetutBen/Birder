@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5j0pg0krwk4t"]
+[gd_scene load_steps=16 format=3 uid="uid://c5j0pg0krwk4t"]
 
 [ext_resource type="Script" uid="uid://7oni0icddkt3" path="res://Scripts/Pause Menu/PauseMenu.gd" id="1_tm1hf"]
 [ext_resource type="Theme" uid="uid://c7vaw5wq61pbh" path="res://Themes/UI.tres" id="2_b0cm4"]
+[ext_resource type="Texture2D" uid="uid://djbevmqvqc1ix" path="res://Sprites/Kenny Icons/arrowLeft.png" id="4_gad4m"]
 [ext_resource type="Script" uid="uid://c0igtkxsnjsgj" path="res://Scripts/UI/TextButtonGroup.gd" id="4_n7qms"]
 [ext_resource type="Texture2D" uid="uid://r50oq5df1ugk" path="res://Sprites/UI/UI Panels.png" id="5_oadjm"]
+[ext_resource type="Texture2D" uid="uid://biyyl02cmp8kc" path="res://Sprites/Kenny Icons/gear.png" id="5_vvnbd"]
 [ext_resource type="Script" uid="uid://cqfqww5rcrh8n" path="res://Scripts/UI/MenuText.gd" id="6_jy3lh"]
+[ext_resource type="Texture2D" uid="uid://d31m2o62t6d1v" path="res://Sprites/Kenny Icons/exitLeft.png" id="7_vvnbd"]
 
 [sub_resource type="Gradient" id="Gradient_e2pts"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -40,52 +43,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tm1hf")
+metadata/_edit_lock_ = true
 
 [node name="Gradient" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 1.0
-offset_right = 603.0
+offset_right = 160.0
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_xadrl")
-metadata/_edit_lock_ = true
+expand_mode = 1
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 1.0
-offset_right = 338.0
+offset_right = 91.0
 grow_vertical = 2
 color = Color(0.0357173, 0.100152, 0.126787, 1)
-metadata/_edit_lock_ = true
-
-[node name="Title" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 36.0
-offset_top = 71.0
-offset_right = -846.0
-offset_bottom = -448.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_b0cm4")
-theme_type_variation = &"Heading"
-text = "Paused"
-vertical_alignment = 1
 
 [node name="Button Group" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = 286.0
-offset_right = -898.0
-offset_bottom = -159.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 8.0
+offset_top = 14.0
+offset_right = 84.0
+offset_bottom = 217.0
 script = ExtResource("4_n7qms")
 active = true
 open_on_right = true
@@ -100,26 +83,20 @@ highlight_action = 2
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
 layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 198.0
-offset_bottom = 69.0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 75.0
+offset_bottom = 65.7
 texture = SubResource("AtlasTexture_u50t2")
 expand_mode = 1
 
-[node name="Text" type="RichTextLabel" parent="Button Group/Resume Button"]
-clip_contents = false
-custom_minimum_size = Vector2(0, 64.9)
+[node name="TextureRect2" type="TextureRect" parent="Button Group/Resume Button"]
 layout_mode = 0
-offset_left = 30.0
-offset_right = 126.0
-offset_bottom = 65.0
-mouse_filter = 2
-theme = ExtResource("2_b0cm4")
-bbcode_enabled = true
-text = "Resume"
-scroll_active = false
-autowrap_mode = 0
+offset_left = 13.0
+offset_top = 7.699997
+offset_right = 63.0
+offset_bottom = 57.699997
+texture = ExtResource("4_gad4m")
 
 [node name="Debug Menu" type="Control" parent="Button Group"]
 unique_name_in_owner = true
@@ -132,25 +109,19 @@ highlight_action = 2
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
 layout_mode = 0
-offset_left = 4.0
-offset_top = -9.0
-offset_right = 190.0
-offset_bottom = 75.0
+offset_right = 81.0
+offset_bottom = 73.0
 texture = SubResource("AtlasTexture_oadjm")
+expand_mode = 1
 
-[node name="Text" type="RichTextLabel" parent="Button Group/Debug Menu"]
-clip_contents = false
-custom_minimum_size = Vector2(0, 64.9)
-layout_mode = 0
-offset_left = 30.0
-offset_right = 126.0
-offset_bottom = 65.0
-mouse_filter = 2
-theme = ExtResource("2_b0cm4")
-bbcode_enabled = true
-text = "Debug"
-scroll_active = false
-autowrap_mode = 0
+[node name="TextureRect2" type="TextureRect" parent="Button Group/Debug Menu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 62.0
+offset_bottom = 64.0
+texture = ExtResource("5_vvnbd")
 
 [node name="Quit Button" type="Control" parent="Button Group"]
 custom_minimum_size = Vector2(0, 65)
@@ -162,39 +133,96 @@ highlight_action = 2
 self_modulate = Color(0.278532, 0.0895237, 0.177514, 1)
 custom_minimum_size = Vector2(0, 67.7)
 layout_mode = 0
-offset_left = 4.0
-offset_top = -3.5
-offset_right = 147.0
-offset_bottom = 68.5
+offset_left = 2.0
+offset_top = 9.0
+offset_right = 76.0
+offset_bottom = 81.0
 texture = SubResource("AtlasTexture_gad4m")
+expand_mode = 1
 
-[node name="Text" type="RichTextLabel" parent="Button Group/Quit Button"]
-clip_contents = false
-custom_minimum_size = Vector2(0, 64.9)
+[node name="TextureRect2" type="TextureRect" parent="Button Group/Quit Button"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 11.0
+offset_top = 19.0
+offset_right = 61.0
+offset_bottom = 69.0
+texture = ExtResource("7_vvnbd")
+
+[node name="Photo Book" type="Control" parent="."]
+layout_mode = 1
+offset_left = 254.0
+offset_top = 68.0
+offset_right = 1047.0
+offset_bottom = 582.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Photo Book"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1.2032688e-08, 0.10086747, 0.10161289, 1)
+
+[node name="Album Photo" type="ColorRect" parent="Photo Book/ColorRect"]
 layout_mode = 0
-offset_left = 30.0
-offset_right = 126.0
-offset_bottom = 65.0
-mouse_filter = 2
-theme = ExtResource("2_b0cm4")
-bbcode_enabled = true
-text = "Quit"
-scroll_active = false
-autowrap_mode = 0
+offset_left = 587.0
+offset_top = 27.0
+offset_right = 758.0
+offset_bottom = 137.0
+
+[node name="Album Photo2" type="ColorRect" parent="Photo Book/ColorRect"]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 192.0
+offset_right = 757.0
+offset_bottom = 302.0
+
+[node name="Album Photo3" type="ColorRect" parent="Photo Book/ColorRect"]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 365.0
+offset_right = 757.0
+offset_bottom = 475.0
+
+[node name="Album Photo4" type="ColorRect" parent="Photo Book/ColorRect"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 28.0
+offset_right = 391.0
+offset_bottom = 138.0
+
+[node name="Album Photo5" type="ColorRect" parent="Photo Book/ColorRect"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 193.0
+offset_right = 390.0
+offset_bottom = 303.0
+
+[node name="Album Photo6" type="ColorRect" parent="Photo Book/ColorRect"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 366.0
+offset_right = 390.0
+offset_bottom = 476.0
 
 [node name="Debug Group" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 384.0
-offset_top = 232.0
-offset_right = -612.0
-offset_bottom = -266.0
+offset_left = 114.0
+offset_top = 92.0
+offset_right = -642.0
+offset_bottom = -353.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_n7qms")
 close_on_left = true
+metadata/_edit_group_ = true
 
 [node name="Reset Data" type="Control" parent="Debug Group"]
 custom_minimum_size = Vector2(0, 65)

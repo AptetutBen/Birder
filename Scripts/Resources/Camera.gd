@@ -7,6 +7,7 @@ signal viewfinder_changed(ViewFinder)
 signal battery_changed(Battery)
 signal shot_count_changed(int)
 signal take_photo
+signal finish_taking_photo
 signal focus_changed(float)
 signal zoom_changed(float)
 signal flash_toggle_changed(bool)
@@ -36,19 +37,15 @@ var current_lens := "standard"
 
 var filmRoll : FilmRoll
 
+var active : bool
 var focus_distance: float
 var focus_target: float
 
 var zoom_amount : float
 var zoom_target : float
-var active : bool
-
-#var active : bool = false
 
 @export var zoom_lerp_speed: float = 6.0
-
-@export var auto_focus_on : bool
-@export var flash_on : bool
+var auto_focus_on : bool
 
 var storage : Storage
 var lens : Lens
@@ -69,8 +66,21 @@ func _ready() -> void:
 		_add_attachment(attachment)
 					
 	camera_3d.attributes = attrs
-	if filmRoll == null:
-		filmRoll = FilmRoll.new()
+	change_film_roll(FilmRoll.new())
+	disable_viewport()
+
+
+func disable_viewport() -> void:
+	viewport.set_update_mode(SubViewport.UPDATE_DISABLED)
+	camera_3d.visible = false
+
+func enable_viewport() -> void:
+	viewport.set_update_mode(SubViewport.UPDATE_ALWAYS)
+	camera_3d.visible = true
+
+func change_film_roll(roll: FilmRoll) -> void:
+	filmRoll = roll
+	PhotoPanel.Instance.set_filmroll(roll)
 
 func get_viewfinder_offset() -> Vector3:
 	if ViewFinder == null:
@@ -88,7 +98,7 @@ func add_attachment_id(id: String) -> String:
 
 func on_change_lens(new_lens : Lens) -> void:
 	# focus
-	if new_lens.data.has_infinite_focus:
+	if !new_lens.data.has_infinite_focus:
 		attrs.dof_blur_far_enabled = false
 		attrs.dof_blur_near_distance = new_lens.data.focal_point_max - (new_lens.data.focal_depth)/2
 		focus_distance = new_lens.data.focal_point_min
@@ -194,15 +204,16 @@ func _process(delta: float) -> void:
 				focus_changed.emit(focus_distance)
 	
 	if lens.data.can_zoom:
-		if Input.is_action_pressed("ZoomIn"):
-			zoom_target = min(lens.fov_max,zoom_target + lens.zoom_speed * delta)
+		if Input.is_action_just_released("ZoomOut"):
+			zoom_target = min(lens.data.fov_max,zoom_target + lens.data.zoom_speed * delta)
 			zoom_changed.emit(zoom_target)
-		if Input.is_action_pressed("ZoomOut"):
-			zoom_target = max(lens.fov_min,zoom_target - lens.zoom_speed * delta)
+		if Input.is_action_just_released("ZoomIn"):
+			zoom_target = max(lens.data.fov_min,zoom_target - lens.data.zoom_speed * delta)
 			zoom_changed.emit(zoom_target)
 	
 	if Input.is_action_just_pressed("FlashToggle") && flash != null:
 		flash.toggle()
+		print(flash.flash_on)
 	
 	zoom_amount = lerp(zoom_amount, zoom_target, delta * zoom_lerp_speed)
 	camera_3d.fov = zoom_amount
@@ -232,12 +243,24 @@ func autofocus_to(target: Node3D) -> void:
 	if target:
 		focus_distance = global_position.distance_to(target.global_position)
 
-func capture_photo() -> Image:
-	take_photo.emit()
+func capture_photo() -> void:
 	
-	if flash_on && flash != null:
+	if flash != null:
 		flash.flash()
-		await get_tree().process_frame
+	
+	camera_3d.set_cull_mask_value(2,false)
+	camera_3d.set_cull_mask_value(3,true)
+	
+	# Disable Main Viewport
+	var scene_tree = Engine.get_main_loop() as SceneTree
+	var root_viewport : Viewport = scene_tree.root.get_viewport()
+	
+	RenderingServer.viewport_set_update_mode(root_viewport.get_viewport_rid(),RenderingServer.VIEWPORT_UPDATE_DISABLED)
+	
+	
+	RenderingServer.force_draw()
+	await RenderingServer.frame_post_draw
+	
 	
 	# Get the texture from the viewport
 	var tex: Texture2D = viewport.get_texture()
@@ -246,9 +269,43 @@ func capture_photo() -> Image:
 	var img: Image = tex.get_image()
 	
 	filmRoll.add_photo(img)
-	# img.save_png("user://capture.png")
+	#img.save_png("user://capture.png")
 	
-	return img
+	camera_3d.set_cull_mask_value(2,true)
+	camera_3d.set_cull_mask_value(3,false)
+	await get_tree().process_frame
+	
+	await get_tree().process_frame
+	RenderingServer.viewport_set_update_mode(root_viewport.get_viewport_rid(),RenderingServer.VIEWPORT_UPDATE_ALWAYS)
+
+	
+	#RenderingServer.viewport_set_active(root_viewport.get_viewport_rid(), true)
+	#viewport.render_target_update_mode = SubViewport.UpdateMode.UPDATE_DISABLED
+	take_photo.emit()
+	
+	
+	#camera_3d.set_cull_mask_value(2,true)
+	#camera_3d.set_cull_mask_value(3,false)
+	await get_tree().process_frame
+	
+	RenderingServer.viewport_set_update_mode(viewport.get_viewport_rid(), RenderingServer.VIEWPORT_UPDATE_ALWAYS)
+	finish_taking_photo.emit()
+	
+#func _render_subviewport(subviewport: SubViewport) -> Image:
+	## Disable main viewport so it doesn't redrawn
+	#var scene_tree = Engine.get_main_loop() as SceneTree
+	#var root_viewport = scene_tree.root.get_viewport_rid()
+	#RenderingServer.viewport_set_active(root_viewport, false)
+	#
+ 	## Render SubViewport once
+	#RenderingServer.viewport_set_update_mode(subviewport.get_viewport_rid(), RenderingServer.VIEWPORT_UPDATE_ONCE)
+	#RenderingServer.force_draw()
+	#await RenderingServer.frame_post_draw
+	#
+	## Enable main viewport again
+	#RenderingServer.viewport_set_active(root_viewport, true)
+#
+	#return subviewport.get_texture().get_image()
 
 func draw_obj_debugs(obj : Node3D) -> void:
 	var obj_pos = obj.global_transform.origin 
